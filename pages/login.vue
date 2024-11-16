@@ -1,77 +1,33 @@
 <script setup lang="ts">
-import Pusher from 'pusher-js'
+definePageMeta({ layout: 'auth' })
 
-const { $api } = useNuxtApp()
-const config = useRuntimeConfig()
-
-let pusher: Pusher | null = null
-// Function to initialize Pusher only once
-const initPusher = () => {
-  if (!pusher) {
-    pusher = new Pusher(config.public.pusherKey, {
-      cluster: 'eu'
-    })
-  }
-}
-
-const channel = ref('')
-// Function to fetch and update the channel
-type ChannelResponse = {
-  channel: string
-}
-const getChannel = async () => {
-  try {
-    handleChannelUnsubscribe()
-    const response: ChannelResponse = await $api('api/v1/auth/channel/')
-    channel.value = response.channel
-    return response
-  } catch (err) {
-    console.error('Error getting channel:', err)
-  }
-}
-
-// Function to handle login events
-type LoginEventResponse = {
-  token: string
-}
-const handleLogin = (data: LoginEventResponse) => {
-  console.log('Login data:', data)
-}
-
-// Subscribe to a new channel and bind the login event
-const handleChannelSubscribe = () => {
-  if (!pusher) return
-  const subscribedChannel = pusher.subscribe(channel.value)
-  subscribedChannel.bind('login-event', handleLogin)
-}
-
-// Unsubscribe from a current channel
-const handleChannelUnsubscribe = () => {
-  if (pusher && channel.value) {
-    pusher.unsubscribe(channel.value)
-    channel.value = ''
-  }
-}
-
-watch(channel, () => handleChannelSubscribe())
-
-const channelUpdateInterval = ref()
-onMounted(() => {
-  initPusher()
-  getChannel()
-  channelUpdateInterval.value = setInterval(() => getChannel(), 20000)
-})
-
-onUnmounted(() => {
-  if (channelUpdateInterval.value) {
-    clearInterval(channelUpdateInterval.value)
-  }
-  handleChannelUnsubscribe()
-})
+const authTabsFlow = ['settings', 'device', 'link']
 </script>
 
 <template>
-  <QrCode :data="channel" />
-</template>
+  <div
+    class="flex flex-col-reverse items-center gap-y-4 rounded-lg bg-shark-50 p-3 shadow md:flex-row md:gap-x-8 md:p-5 dark:bg-shark-900"
+  >
+    <div>
+      <div class="align-center mb-4 flex gap-x-3">
+        <UBadge color="shark" variant="subtle" class="rounded-lg">
+          <UIcon name="i-heroicons-viewfinder-circle" class="size-6" />
+        </UBadge>
+        <h1 class="text-2xl md:text-3xl">{{ $t('auth.loginToQurlWeb') }}</h1>
+      </div>
 
-<style scoped></style>
+      <ol class="list-inside list-decimal space-y-2">
+        <li>{{ $t('auth.openQurlOnPhone') }}</li>
+        <li>
+          {{ $t('instructions.goTo') }}
+          <template v-for="(tab, index) in authTabsFlow" :key="tab">
+            <UBadge :label="$t(`navigation.${tab}`)" color="shark" variant="subtle" class="rounded-lg" />
+            <span v-if="index !== authTabsFlow.length - 1" class="mx-1">></span>
+          </template>
+        </li>
+        <li>{{ $t('auth.confirmLoginInstruction') }}</li>
+      </ol>
+    </div>
+    <AuthChannelQrCode class="w-64" />
+  </div>
+</template>

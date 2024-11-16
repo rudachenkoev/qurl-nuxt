@@ -1,0 +1,15 @@
+{
+  "auth": {
+    "loginToQurlWeb": "Log into Qurl Web",
+    "openQurlOnPhone": "Open Qurl on your phone",
+    "confirmLoginInstruction": "Point your phone at this screen to confirm login"
+  },
+  "instructions": {
+    "goTo": "Go to"
+  },
+  "navigation": {
+    "settings": "Settings",
+    "device": "Device",
+    "link": "Link"
+  }
+}

@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import QRCodeStyling, { type Options } from 'qr-code-styling'
-import Logo from '../public/images/facebook_logo.svg'
+import Logo from './public/images/favicon.png'
+import tailwindConfig from '~/tailwind.config'
 
 const props = defineProps({
   data: { type: String, default: '' },
-  size: { type: Number, default: 300 }
+  size: { type: Number, default: 256 }
 })
 
 const qrCodeStyling = ref()
@@ -16,15 +17,18 @@ const options = computed<Partial<Options>>(() => ({
   data: props.data,
   image: Logo,
   dotsOptions: {
-    color: '#000',
-    type: 'rounded'
+    color: tailwindConfig.theme.extend.colors.shark[950],
+    type: 'extra-rounded'
   },
   backgroundOptions: {
-    color: '#fff'
+    color: tailwindConfig.theme.extend.colors.shark[50]
   },
   imageOptions: {
     crossOrigin: 'anonymous',
     margin: 10
+  },
+  cornersSquareOptions: {
+    type: 'extra-rounded'
   }
 }))
 
@@ -37,12 +41,5 @@ watch(options, value => qrCodeStyling.value.update(value))
 </script>
 
 <template>
-  <div ref="qrCode"></div>
+  <div ref="qrCode" class="overflow-hidden rounded-xl" />
 </template>
-
-<style scoped>
-svg {
-  width: 100%;
-  height: 100%;
-}
-</style>

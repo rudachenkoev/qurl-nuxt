@@ -1,0 +1,15 @@
+{
+  "auth": {
+    "loginToQurlWeb": "Увійдіть у Qurl Web",
+    "openQurlOnPhone": "Відкрийте Qurl на вашому телефоні",
+    "confirmLoginInstruction": "Наведіть телефон на цей екран, щоб підтвердити вхід"
+  },
+  "instructions": {
+    "goTo": "Перейдіть до"
+  },
+  "navigation": {
+    "settings": "Налаштування",
+    "device": "Пристрій",
+    "link": "Посилання"
+  }
+}
