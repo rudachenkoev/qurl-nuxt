@@ -3,6 +3,7 @@ import Pusher from 'pusher-js'
 
 const { $api } = useNuxtApp()
 const config = useRuntimeConfig()
+const localeRoute = useLocaleRoute()
 
 let pusher: Pusher | null = null
 // Function to initialize Pusher only once
@@ -36,6 +37,11 @@ type LoginEventResponse = {
 }
 const handleLogin = (data: LoginEventResponse) => {
   console.log('Login data:', data)
+  const token = useCookie('TOKEN', { httpOnly: false, sameSite: 'lax' })
+  token.value = `Bearer ${data.token}`
+
+  const route = localeRoute({ name: 'index' })
+  navigateTo(route ? route.fullPath : '/')
 }
 
 // Subscribe to a new channel and bind the login event

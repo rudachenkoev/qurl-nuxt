@@ -1,19 +1,29 @@
-export default defineNuxtPlugin(nuxtApp => {
-  // const { session } = useUserSession()
+export default defineNuxtPlugin((nuxtApp) => {
   const config = useRuntimeConfig()
   const api = $fetch.create({
     baseURL: config.public.apiBase,
-    // onRequest({ request, options, error }) {
-    //   if (session.value?.token) {
-    //     options.headers.set('Authorization', `Bearer ${session.value?.token}`)
-    //   }
-    // },
+    async onRequest({ request, options, error }) {
+      await nuxtApp.runWithContext(() => {
+        const token = useCookie('TOKEN', { httpOnly: false, sameSite: 'lax' })
+        if (token.value) {
+          options.headers.set('Authorization', token.value)
+        }
+      })
+    },
     async onResponseError({ response }) {
       if (response.status === 401) {
-        await nuxtApp.runWithContext(() => navigateTo('/login'))
+        await nuxtApp.runWithContext(() => {
+          const token = useCookie('TOKEN', { httpOnly: false, sameSite: 'lax' })
+          token.value = null
+
+          const localeRoute = useLocaleRoute()
+          const route = localeRoute({ name: 'login' })
+          return navigateTo(route ? route.fullPath : '/login')
+        })
       }
     }
   })
+
   return {
     provide: {
       api
