@@ -7,7 +7,7 @@ export const useUserStore = defineStore('user', () => {
       user.value = await $api('api/v1/accounts/me/')
       return user.value
     } catch (err) {
-      console.error('Get current user error:', err)
+      useErrorHandler(err, 'Get current user error')
     }
   }
 

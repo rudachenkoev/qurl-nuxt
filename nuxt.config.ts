@@ -10,6 +10,15 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxt/ui', '@nuxtjs/i18n', '@nuxt/image', '@nuxt/fonts', '@pinia/nuxt'],
   css: ['~/assets/sass/main.sass'],
+  vite: {
+    css: {
+      preprocessorOptions: {
+        sass : {
+          silenceDeprecations: ["legacy-js-api"],
+        },
+      },
+    },
+  },
   fonts: {
     families: [{ name: 'Nunito', provider: 'google' }]
   },

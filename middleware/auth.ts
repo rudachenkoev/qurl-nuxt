@@ -1,7 +1,7 @@
 import { useUserStore } from '~/stores/user'
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
-  const token = useCookie('TOKEN', { httpOnly: false, sameSite: 'lax' })
+  const token = useCookie('TOKEN')
 
   const userStore = useUserStore()
   const { user } = storeToRefs(userStore)
@@ -16,9 +16,10 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
 
   if (token.value) {
     // Redirect logged-in users away from the login page
-    if (user.value) {
+    if (user.value && to.name === loginRoute.name) {
       return navigateTo(indexRoute.fullPath)
-    } else {
+    }
+    if (!user.value) {
       // Fetch user data if not already loaded
       await userStore.getCurrentUser()
     }

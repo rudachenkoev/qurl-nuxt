@@ -27,7 +27,7 @@ const getChannel = async () => {
     channel.value = response.channel
     return response
   } catch (err) {
-    console.error('Error getting channel:', err)
+    useErrorHandler(err, 'Error getting channel')
   }
 }
 
@@ -37,7 +37,7 @@ type LoginEventResponse = {
 }
 const handleLogin = (data: LoginEventResponse) => {
   console.log('Login data:', data)
-  const token = useCookie('TOKEN', { httpOnly: false, sameSite: 'lax' })
+  const token = useCookie('TOKEN')
   token.value = `Bearer ${data.token}`
 
   const route = localeRoute({ name: 'index' })

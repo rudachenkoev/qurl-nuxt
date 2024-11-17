@@ -6,3 +6,8 @@ export function useApi<T>(url: string | (() => string), options?: UseFetchOption
     $fetch: useNuxtApp().$api as typeof $fetch
   })
 }
+
+export function useErrorHandler(err: unknown, context: string): void {
+  const message = err instanceof Error ? err.message : String(err)
+  console.error(`${context}:`, message)
+}
