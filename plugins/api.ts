@@ -12,14 +12,7 @@ export default defineNuxtPlugin(nuxtApp => {
     },
     async onResponseError({ response }) {
       if (response.status === 401) {
-        await nuxtApp.runWithContext(() => {
-          const token = useCookie('TOKEN')
-          token.value = null
-
-          const localeRoute = useLocaleRoute()
-          const route = localeRoute({ name: 'login' })
-          return navigateTo(route ? route.fullPath : '/login')
-        })
+        await nuxtApp.runWithContext(() => useLogout())
       }
     }
   })
