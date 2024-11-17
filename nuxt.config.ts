@@ -13,11 +13,11 @@ export default defineNuxtConfig({
   vite: {
     css: {
       preprocessorOptions: {
-        sass : {
-          silenceDeprecations: ["legacy-js-api"],
-        },
-      },
-    },
+        sass: {
+          silenceDeprecations: ['legacy-js-api']
+        }
+      }
+    }
   },
   fonts: {
     families: [{ name: 'Nunito', provider: 'google' }]
