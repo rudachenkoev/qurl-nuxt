@@ -1,7 +1,11 @@
 export const useUserStore = defineStore('user', () => {
   const { $api } = useNuxtApp()
 
-  const user = ref(null)
+  interface User {
+    email: string
+    isActive: boolean
+  }
+  const user = ref<User | null>(null)
   const getCurrentUser = async () => {
     try {
       user.value = await $api('api/v1/accounts/me/')

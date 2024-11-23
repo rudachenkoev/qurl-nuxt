@@ -1,54 +1,32 @@
 <script setup lang="ts">
+import type { VerticalNavigationLink } from '#ui/types'
+import { useUserStore } from '~/stores/user'
+
 const localeRoute = useLocaleRoute()
-const route = useRoute()
 const { t } = useI18n()
+const { user } = storeToRefs(useUserStore())
 
-type Link = {
-  icon: string
-  text: string
-  to: ReturnType<typeof localeRoute>
-}
-const links = computed<Link[]>(() => [
-  { icon: 'home', text: t('navigation.home'), to: localeRoute({ name: 'index' }) },
-  { icon: 'link', text: t('navigation.links'), to: localeRoute({ name: 'link' }) },
-  { icon: 'cog-6-tooth', text: t('navigation.settings'), to: localeRoute({ name: 'settings' }) }
+const links = computed<VerticalNavigationLink[]>(() => [
+  { icon: 'i-heroicons-home', label: t('navigation.home'), to: localeRoute({ name: 'index' }) },
+  { icon: 'i-heroicons-link', label: t('navigation.links'), to: localeRoute({ name: 'link' }) },
+  { icon: 'i-heroicons-cog-6-tooth', label: t('navigation.settings'), to: localeRoute({ name: 'settings' }) }
 ])
-
-const currentRouteName = computed(() => route.name)
-const checkIsCurrentRoute = (to: Link['to']) => to?.name === currentRouteName.value
 </script>
 
 <template>
-  <div
-    class="fixed flex h-[calc(100vh-64px)] w-32 flex-col items-center justify-between rounded-3xl bg-black px-4 py-8 shadow"
-  >
-    <NuxtLink :to="localeRoute({ name: 'index' })">
-      <NuxtImg src="./images/favicon.png" width="48" height="48" alt="logo" />
-    </NuxtLink>
+  <div>
+    <div class="flex items-center gap-3">
+      <NuxtLink :to="localeRoute({ name: 'index' })">
+        <NuxtImg src="./images/favicon.png" width="36" height="36" alt="logo" />
+      </NuxtLink>
+      <div>
+        <p class="whitespace-nowrap text-base font-medium text-shark-950 dark:text-shark-50">Yevhen Rudachenko</p>
+        <p class="whitespace-nowrap text-sm font-light text-shark-800 dark:text-shark-300">{{ user?.email }}</p>
+      </div>
+    </div>
 
-    <nav>
-      <ul class="flex flex-col space-y-4">
-        <UTooltip v-for="link in links" :key="link.icon" :text="link.text" :popper="{ placement: 'right' }">
-          <UButton
-            :to="link.to"
-            :ui="{ rounded: 'rounded-lg' }"
-            :icon="`i-heroicons-${link.icon}${checkIsCurrentRoute(link.to) ? '-solid' : ''}`"
-            :variant="checkIsCurrentRoute(link.to) ? 'outline' : 'ghost'"
-            color="white"
-            size="xl"
-          />
-        </UTooltip>
-      </ul>
-    </nav>
+    <UDivider class="my-4" />
 
-    <UTooltip :text="$t('auth.logout')" :popper="{ placement: 'right' }">
-      <UButton
-        icon="i-heroicons-arrow-left-end-on-rectangle"
-        size="xl"
-        color="white"
-        variant="ghost"
-        @click="useLogout()"
-      />
-    </UTooltip>
+    <UVerticalNavigation :links="links" />
   </div>
 </template>

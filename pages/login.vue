@@ -6,7 +6,7 @@ const authTabsFlow = ['settings', 'device', 'link']
 
 <template>
   <div
-    class="flex flex-col-reverse items-center gap-y-4 rounded-lg bg-shark-50 p-3 shadow md:flex-row md:gap-x-8 md:p-5 dark:bg-shark-900"
+    class="flex flex-col-reverse items-center gap-y-4 rounded-lg border border-shark-200 bg-shark-50 p-3 md:flex-row md:gap-x-8 md:p-5 dark:border-shark-600 dark:bg-shark-900"
   >
     <div>
       <div class="align-center mb-4 flex gap-x-3">

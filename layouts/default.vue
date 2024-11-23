@@ -1,18 +1,16 @@
 <script setup lang="ts"></script>
 
 <template>
-  <UContainer
-    :ui="{
-      base: 'mx-auto flex relative bg-shark-100 dark:bg-shark-950',
-      padding: 'p-4 sm:p-6 lg:p-8',
-      constrained: 'max-w-full h-screen overflow-auto'
-    }"
-  >
-    <AppNavigation />
-    <UContainer>
-      <slot />
-    </UContainer>
-  </UContainer>
+  <div class="h-screen bg-shark-100 p-6 dark:bg-shark-950">
+    <div
+      class="container mx-auto flex gap-6 rounded-2xl border border-shark-200 bg-shark-50 p-6 dark:border-shark-600 dark:bg-shark-900"
+    >
+      <AppNavigation />
+      <div class="grow rounded-xl border border-shark-200 bg-white dark:border-shark-600 dark:bg-shark-700">
+        <slot />
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped></style>
