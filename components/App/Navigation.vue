@@ -15,18 +15,18 @@ const links = computed<VerticalNavigationLink[]>(() => [
 
 <template>
   <div>
-    <div class="flex items-center gap-3">
+    <div
+      class="flex h-16 items-center gap-3 border-y border-b-shark-200 border-t-transparent px-3 dark:border-shark-600"
+    >
       <NuxtLink :to="localeRoute({ name: 'index' })">
-        <NuxtImg src="./images/favicon.png" width="36" height="36" alt="logo" />
+        <NuxtImg src="./images/favicon.png" width="28" height="28" alt="logo" />
       </NuxtLink>
       <div>
-        <p class="whitespace-nowrap text-base font-medium text-shark-950 dark:text-shark-50">Yevhen Rudachenko</p>
-        <p class="whitespace-nowrap text-sm font-light text-shark-800 dark:text-shark-300">{{ user?.email }}</p>
+        <p class="whitespace-nowrap text-sm font-medium text-shark-950 dark:text-shark-50">John Doe</p>
+        <p class="whitespace-nowrap text-xs text-shark-800 dark:text-shark-300">{{ user?.email }}</p>
       </div>
     </div>
 
-    <UDivider class="my-4" />
-
-    <UVerticalNavigation :links="links" />
+    <UVerticalNavigation :links="links" class="py-3" />
   </div>
 </template>

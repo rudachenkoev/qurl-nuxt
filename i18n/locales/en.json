@@ -14,5 +14,6 @@
     "device": "Device",
     "link": "Link",
     "links": "Links"
-  }
+  },
+  "greeting": "Hello, {name}! It's good to see you again."
 }
