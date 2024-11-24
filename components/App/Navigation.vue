@@ -8,13 +8,13 @@ const { user } = storeToRefs(useUserStore())
 
 const links = computed<VerticalNavigationLink[]>(() => [
   { icon: 'i-heroicons-home', label: t('navigation.home'), to: localeRoute({ name: 'index' }) },
-  { icon: 'i-heroicons-link', label: t('navigation.links'), to: localeRoute({ name: 'link' }) },
+  { icon: 'i-heroicons-bookmark', label: t('navigation.bookmarks'), to: localeRoute({ name: 'bookmarks' }) },
   { icon: 'i-heroicons-cog-6-tooth', label: t('navigation.settings'), to: localeRoute({ name: 'settings' }) }
 ])
 </script>
 
 <template>
-  <div>
+  <div class="min-w-48">
     <div
       class="flex h-16 items-center gap-3 border-y border-b-shark-200 border-t-transparent px-3 dark:border-shark-600"
     >

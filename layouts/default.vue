@@ -1,4 +1,12 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useDirectoryStore } from '~/stores/directory'
+
+const directoryStore = useDirectoryStore()
+const { getDirectories } = directoryStore
+const { isDirectoriesLoaded } = storeToRefs(directoryStore)
+
+if (!isDirectoriesLoaded.value) getDirectories()
+</script>
 
 <template>
   <div class="h-screen bg-shark-100 p-6 dark:bg-shark-950">
@@ -10,7 +18,7 @@
         class="grow overflow-hidden rounded-xl border border-shark-200 bg-white dark:border-shark-600 dark:bg-shark-700"
       >
         <AppHeader />
-        <main class="overflow-auto">
+        <main class="overflow-auto p-3">
           <slot />
         </main>
       </div>

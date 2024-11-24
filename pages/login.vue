@@ -1,10 +1,11 @@
 <script setup lang="ts">
+const { t } = useI18n()
 useHead({
   title: t('auth.loginToQurlWeb')
 })
 definePageMeta({ layout: 'auth', middleware: ['auth'] })
 
-const authTabsFlow = ['settings', 'device', 'link']
+const authTabsFlow = ['settings', 'device']
 </script>
 
 <template>
@@ -16,7 +17,7 @@ const authTabsFlow = ['settings', 'device', 'link']
         <UBadge color="shark" variant="subtle" class="rounded-lg">
           <UIcon name="i-heroicons-viewfinder-circle" class="size-6" />
         </UBadge>
-        <h1 class="text-2xl md:text-3xl">{{ $t('auth.loginToQurlWeb') }}</h1>
+        <h1 class="text-2xl font-medium md:text-3xl">{{ $t('auth.loginToQurlWeb') }}</h1>
       </div>
 
       <ol class="list-inside list-decimal space-y-2">

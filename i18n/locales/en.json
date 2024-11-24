@@ -12,8 +12,12 @@
     "home": "Home",
     "settings": "Settings",
     "device": "Device",
-    "link": "Link",
-    "links": "Links"
+    "bookmarks": "Bookmarks"
   },
-  "greeting": "Hello, {name}! It's good to see you again."
+  "fields": {
+    "name": "Name",
+    "createdAt": "Created At"
+  },
+  "greeting": "Hello, {name}! It's good to see you again.",
+  "lastPublications": "Last publications"
 }
