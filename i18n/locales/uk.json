@@ -18,6 +18,41 @@
     "name": "Назва",
     "createdAt": "Дата створення"
   },
-  "greeting": "Вітаю, {name}! Радий вас знову бачити.",
-  "lastPublications": "Остані публікації"
+  "btn": {
+    "save": "Зберегти",
+    "edit": "Редагувати",
+    "delete": "Видалити",
+    "confirm": "Підтвердити",
+    "cancel": "Скасувати"
+  },
+  "category": {
+    "create": "Створити категорію",
+    "creating": "Створення категорії",
+    "created": "Категорію успішно створено",
+    "deleting": "Видалення категорії",
+    "deleted": "Категорію успішно видалено",
+    "deletingConfirmation": "Ви впевнені, що хочете видалити категорію «{category}» та всі записи, які їй належать?",
+    "default": {
+      "Cafes and restaurants": "Кафе та ресторани",
+      "Gifts": "Подарунки",
+      "Entertainment": "Розваги",
+      "Travel": "Подорожі",
+      "Documents and Organizations": "Документи та організації",
+      "Technology and equipment": "Техніка та обладнання",
+      "Home Goods": "Товари для дому",
+      "Series and movies": "Серіали та фільми",
+      "Streaming platforms and videos": "Стрімінгові платформи та відео",
+      "Beauty and Health": "Краса та здоров'я"
+    }
+  },
+  "bookmark": {
+    "create": "Створити закладку"
+  },
+  "placeholder": {
+    "name": "Назва запису"
+  },
+  "greeting": "Вітаю, {name}! Раді знову бачити вас.",
+  "lastPublications": "Останні публікації",
+  "payAttention": "Зверніть увагу",
+  "noItems": "Немає елементів"
 }

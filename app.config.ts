@@ -17,6 +17,9 @@ export default defineAppConfig({
       border: {
         base: 'border-shark-200 dark:border-shark-600'
       }
+    },
+    button: {
+      inline: 'justify-center'
     }
   }
 })

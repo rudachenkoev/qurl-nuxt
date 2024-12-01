@@ -8,4 +8,7 @@ useHead({
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
+
+  <UNotifications />
+  <ConfirmationDialog />
 </template>

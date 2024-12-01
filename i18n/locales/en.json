@@ -18,6 +18,41 @@
     "name": "Name",
     "createdAt": "Created At"
   },
+  "btn": {
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "cancel": "Cancel"
+  },
+  "category": {
+    "create": "Create category",
+    "creating": "Category creating",
+    "created": "Category has been successfully created",
+    "deleting": "Category deleting",
+    "deleted": "Category has been successfully deleted",
+    "deletingConfirmation": "Are you sure you want to delete the category “{category}” and all the entries that belong to it?",
+    "default": {
+      "Cafes and restaurants": "Cafes and restaurants",
+      "Gifts": "Gifts",
+      "Entertainment": "Entertainment",
+      "Travel": "Travel",
+      "Documents and Organizations": "Documents and Organizations",
+      "Technology and equipment": "Technology and equipment",
+      "Home Goods": "Home Goods",
+      "Series and movies": "Series and movies",
+      "Streaming platforms and videos": "Streaming platforms and videos",
+      "Beauty and Health": "Beauty and Health"
+    }
+  },
+  "bookmark": {
+    "create": "Create bookmark"
+  },
+  "placeholder": {
+    "name": "Entry Name"
+  },
   "greeting": "Hello, {name}! It's good to see you again.",
-  "lastPublications": "Last publications"
+  "lastPublications": "Last publications",
+  "payAttention": "Pay attention",
+  "noItems": "No items"
 }
