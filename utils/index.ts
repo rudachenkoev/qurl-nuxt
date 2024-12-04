@@ -4,7 +4,7 @@ export const setDefaultQuery = (value: Record<string, any> = {}): Record<string,
     return {}
   }
 
-  return { page: 1, page_size: 20, ...value }
+  return { page: 1, pageCount: 10, ...value }
 }
 
 export function updateStateFields<T>(state: Partial<T>, newState: T) {

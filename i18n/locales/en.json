@@ -61,5 +61,6 @@
   "greeting": "Hello, {name}! It's good to see you again.",
   "lastPublications": "Last publications",
   "payAttention": "Pay attention",
-  "noItems": "No items"
+  "noItems": "No items",
+  "rowsPerPage": "Rows per page"
 }
