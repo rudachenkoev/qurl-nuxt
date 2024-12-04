@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { TableRow, DropdownItem } from '#ui/types'
 import { useConfirmationDialogStore } from '~/stores/confirmationDialog'
+import type { Category } from '~/types'
 
 const { t } = useI18n()
 useHead({
@@ -10,10 +11,11 @@ definePageMeta({ middleware: ['auth'] })
 
 const { $api } = useNuxtApp()
 const route = useRoute()
-const localeRoute = useLocaleRoute()
 const toast = useToast()
 
 const { confirmationHandler } = useConfirmationDialogStore()
+
+const categoryFormDialog = ref()
 
 const {
   data: categories,
@@ -28,8 +30,8 @@ const {
 )
 
 const columns = [
-  { key: 'categoryName', label: t('fields.name') },
-  { key: 'createdAt', label: t('fields.createdAt') },
+  { key: 'categoryName', label: t('fields.name.label') },
+  { key: 'createdAt', label: t('fields.createdAt.label') },
   { key: 'actions', class: 'w-9' }
 ]
 
@@ -47,7 +49,8 @@ const actions = (row: TableRow): DropdownItem[][] => {
     result.push([
       {
         label: t('btn.edit'),
-        icon: 'i-heroicons-pencil-square'
+        icon: 'i-heroicons-pencil-square',
+        click: () => categoryFormDialog.value.openDialogWindow(row)
       },
       {
         label: t('btn.delete'),
@@ -75,18 +78,22 @@ const handleCategoryDelete = async (category: TableRow) => {
     useErrorHandler(err, 'Error while category deleting')
   }
 }
+
+const handleCategoryUpdate = ({ action, response }: { action: 'created' | 'edited'; response: Category }) => {
+  if (action === 'created') {
+    getCategories()
+  } else if (action === 'edited' && categories.value) {
+    const index = categories.value.findIndex(category => category.id === response.id)
+    if (index !== -1) categories.value.splice(index, 1, response)
+  }
+}
 </script>
 
 <template>
   <div class="flex items-center justify-between">
     <h1 class="mb-3 text-2xl font-medium md:text-3xl">{{ $t('navigation.bookmarks') }}</h1>
-    <UButton
-      :label="$t('category.create')"
-      icon="i-heroicons-plus"
-      :to="localeRoute({ name: 'bookmarks-categories-create' })"
-    />
+    <UButton :label="$t('category.create')" icon="i-heroicons-plus" @click="categoryFormDialog.openDialogWindow()" />
+    <CategoryFormDialog ref="categoryFormDialog" @onSuccess="handleCategoryUpdate" />
   </div>
   <AppTable :rows="categories || []" :columns="columns" :loading="status === 'pending'" :actions="actions" />
 </template>
-
-<style scoped></style>

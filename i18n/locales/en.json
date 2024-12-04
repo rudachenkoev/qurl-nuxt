@@ -1,4 +1,7 @@
 {
+  "validation": {
+    "required": "This field is required"
+  },
   "auth": {
     "loginToQurlWeb": "Log into Qurl Web",
     "openQurlOnPhone": "Open Qurl on your phone",
@@ -15,8 +18,13 @@
     "bookmarks": "Bookmarks"
   },
   "fields": {
-    "name": "Name",
-    "createdAt": "Created At"
+    "name": {
+      "label": "Name",
+      "placeholder": "Enter name"
+    },
+    "createdAt": {
+      "label": "Created at"
+    }
   },
   "btn": {
     "save": "Save",
@@ -28,7 +36,9 @@
   "category": {
     "create": "Create category",
     "creating": "Category creating",
+    "editing": "Category editing",
     "created": "Category has been successfully created",
+    "edited": "Category has been successfully edited",
     "deleting": "Category deleting",
     "deleted": "Category has been successfully deleted",
     "deletingConfirmation": "Are you sure you want to delete the category “{category}” and all the entries that belong to it?",
@@ -47,9 +57,6 @@
   },
   "bookmark": {
     "create": "Create bookmark"
-  },
-  "placeholder": {
-    "name": "Entry Name"
   },
   "greeting": "Hello, {name}! It's good to see you again.",
   "lastPublications": "Last publications",

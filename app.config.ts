@@ -19,7 +19,15 @@ export default defineAppConfig({
       }
     },
     button: {
-      inline: 'justify-center'
+      inline: 'justify-center',
+      default: {
+        size: 'md'
+      }
+    },
+    input: {
+      default: {
+        size: 'md'
+      }
     }
   }
 })
