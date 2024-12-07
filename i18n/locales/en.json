@@ -88,5 +88,6 @@
   "payAttention": "Pay attention",
   "noItems": "No items",
   "rowsPerPage": "Rows per page",
-  "autocompleteFormFields": "Autocomplete form fields"
+  "autocompleteFormFields": "Autocomplete form fields",
+  "clearFormConfirmation": "Unsaved changes will be lost. Are you sure you want to clear the form?"
 }

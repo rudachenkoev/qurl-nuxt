@@ -88,5 +88,6 @@
   "payAttention": "Зверніть увагу",
   "noItems": "Немає елементів",
   "rowsPerPage": "Записів на сторінці",
-  "autocompleteFormFields": "Автозаповнення полів форми"
+  "autocompleteFormFields": "Автозаповнення полів форми",
+  "clearFormConfirmation": "Незбережені зміни буде втрачено. Ви впевнені, що хочете очистити форму?"
 }
