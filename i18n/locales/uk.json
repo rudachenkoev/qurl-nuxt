@@ -15,7 +15,8 @@
     "home": "Головна",
     "settings": "Налаштування",
     "device": "Пристрій",
-    "bookmarks": "Закладки"
+    "bookmarks": "Закладки",
+    "categories": "Категорії"
   },
   "fields": {
     "name": {

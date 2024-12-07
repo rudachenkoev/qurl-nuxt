@@ -28,6 +28,11 @@ export default defineAppConfig({
       default: {
         size: 'md'
       }
+    },
+    textarea: {
+      default: {
+        size: 'md'
+      }
     }
   }
 })

@@ -8,6 +8,16 @@ export type Category = {
   updatedAt: string
 }
 
+export type Bookmark = {
+  id: number
+  title: string
+  description: string
+  url: string
+  category: number | null
+  createdAt: string
+  updatedAt: string
+}
+
 export type PaginatedResponse = {
   totalCount: number
   totalPages: number

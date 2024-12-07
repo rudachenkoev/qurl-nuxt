@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import type { TableRow, DropdownItem } from '#ui/types'
 import { useConfirmationDialogStore } from '~/stores/confirmationDialog'
-import type { Bookmark, PaginatedResponse } from '~/types'
+import type { Category, PaginatedResponse } from '~/types'
 
-type ExtendedBookmark = TableRow & Bookmark
+type ExtendedCategory = TableRow & Category
 
 const { t } = useI18n()
 useHead({
-  title: t('navigation.bookmarks')
+  title: t('navigation.categories')
 })
 definePageMeta({ middleware: ['auth'] })
 
@@ -20,12 +20,12 @@ const { confirmationHandler } = useConfirmationDialogStore()
 const categoryFormDialog = ref()
 
 const {
-  data: bookmarks,
+  data: categories,
   status,
-  refresh: getBookmarks
+  refresh: getCategories
 } = await useLazyAsyncData<PaginatedResponse>(
-  'bookmarks',
-  () => $api('api/v1/bookmarks/', { query: setDefaultQuery(route.query) }),
+  'categories',
+  () => $api('api/v1/categories/', { query: setDefaultQuery(route.query) }),
   {
     watch: [() => route.query]
   }
@@ -37,7 +37,7 @@ const columns = [
   { key: 'actions', class: 'w-9' }
 ]
 
-const actions = (row: ExtendedBookmark): DropdownItem[][] => {
+const actions = (row: ExtendedCategory): DropdownItem[][] => {
   const result: DropdownItem[][] = [
     [
       {
@@ -65,7 +65,7 @@ const actions = (row: ExtendedBookmark): DropdownItem[][] => {
   return result
 }
 
-const handleCategoryDelete = async (category: ExtendedBookmark) => {
+const handleCategoryDelete = async (category: ExtendedCategory) => {
   const isConfirm = await confirmationHandler({
     title: t('category.deleting'),
     description: t('category.deletingConfirmation', { category: category.name })
@@ -73,11 +73,20 @@ const handleCategoryDelete = async (category: ExtendedBookmark) => {
   if (!isConfirm) return
 
   try {
-    await $api(`api/v1/bookmarks/${category.id}/`, { method: 'DELETE' })
+    await $api(`api/v1/categories/${category.id}/`, { method: 'DELETE' })
     toast.add({ title: t('category.deleted') })
-    await getBookmarks()
+    await getCategories()
   } catch (err) {
     useErrorHandler(err, 'Error while category deleting')
+  }
+}
+
+const handleCategoryUpdate = ({ action, response }: { action: 'created' | 'edited'; response: Category }) => {
+  if (action === 'created') {
+    getCategories()
+  } else if (action === 'edited' && categories.value) {
+    const index = (categories.value.results as Category[]).findIndex(category => category.id === response.id)
+    if (index !== -1) categories.value.results.splice(index, 1, response)
   }
 }
 </script>
@@ -85,11 +94,12 @@ const handleCategoryDelete = async (category: ExtendedBookmark) => {
 <template>
   <div class="flex items-center justify-between">
     <h1 class="mb-3 text-2xl font-medium md:text-3xl">{{ $t('navigation.bookmarks') }}</h1>
-    <UButton :label="$t('category.create')" icon="i-heroicons-plus" />
+    <UButton :label="$t('category.create')" icon="i-heroicons-plus" @click="categoryFormDialog.openDialogWindow()" />
+    <CategoryFormDialog ref="categoryFormDialog" @onSuccess="handleCategoryUpdate" />
   </div>
   <AppTable
-    :rows="bookmarks?.results || []"
-    :total-count="bookmarks?.totalCount || 0"
+    :rows="categories?.results || []"
+    :total-count="categories?.totalCount || 0"
     :columns="columns"
     :loading="status === 'pending'"
     :actions="actions"
