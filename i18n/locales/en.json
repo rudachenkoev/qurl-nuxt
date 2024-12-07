@@ -48,17 +48,18 @@
     "edit": "Edit",
     "delete": "Delete",
     "confirm": "Confirm",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "clear": "Clear"
   },
   "category": {
     "create": "Create category",
     "creating": "Category creating",
-    "editing": "Category editing",
     "created": "Category has been successfully created",
+    "editing": "Category editing",
     "edited": "Category has been successfully edited",
     "deleting": "Category deleting",
     "deleted": "Category has been successfully deleted",
-    "deletingConfirmation": "Are you sure you want to delete the category “{category}” and all the entries that belong to it?",
+    "deletingConfirmation": "Are you sure you want to delete the category “{name}” and all the entries that belong to it?",
     "default": {
       "Cafes and restaurants": "Cafes and restaurants",
       "Gifts": "Gifts",
@@ -74,7 +75,13 @@
   },
   "bookmark": {
     "create": "Create bookmark",
-    "creating": "Bookmark creating"
+    "creating": "Bookmark creating",
+    "created": "Bookmark created",
+    "editing": "Bookmark editing",
+    "edited": "Bookmark edited",
+    "deleting": "Bookmark deleting",
+    "deleted": "Bookmark deleted",
+    "deletingConfirmation": "Are you sure you want to delete the bookmark “{title}”?"
   },
   "greeting": "Hello, {name}! It's good to see you again.",
   "lastPublications": "Last publications",

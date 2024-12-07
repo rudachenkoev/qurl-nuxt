@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { TableRow, DropdownItem } from '#ui/types'
 import { useConfirmationDialogStore } from '~/stores/confirmationDialog'
-import type { Category, PaginatedResponse } from '~/types'
+import type { Category, PaginatedResponse, SubmitAction } from '~/types'
 
 type ExtendedCategory = TableRow & Category
 
@@ -14,6 +14,7 @@ definePageMeta({ middleware: ['auth'] })
 const { $api } = useNuxtApp()
 const route = useRoute()
 const toast = useToast()
+const localeRoute = useLocaleRoute()
 
 const { confirmationHandler } = useConfirmationDialogStore()
 
@@ -42,7 +43,8 @@ const actions = (row: ExtendedCategory): DropdownItem[][] => {
     [
       {
         label: t('bookmark.create'),
-        icon: 'i-heroicons-plus'
+        icon: 'i-heroicons-plus',
+        click: () => navigateTo(localeRoute({ name: 'bookmarks-create', query: { categoryId: row.id } }))
       }
     ]
   ]
@@ -68,7 +70,7 @@ const actions = (row: ExtendedCategory): DropdownItem[][] => {
 const handleCategoryDelete = async (category: ExtendedCategory) => {
   const isConfirm = await confirmationHandler({
     title: t('category.deleting'),
-    description: t('category.deletingConfirmation', { category: category.name })
+    description: t('category.deletingConfirmation', { name: category.name })
   })
   if (!isConfirm) return
 
@@ -81,7 +83,7 @@ const handleCategoryDelete = async (category: ExtendedCategory) => {
   }
 }
 
-const handleCategoryUpdate = ({ action, response }: { action: 'created' | 'edited'; response: Category }) => {
+const handleCategoryUpdate = ({ action, response }: { action: SubmitAction; response: Category }) => {
   if (action === 'created') {
     getCategories()
   } else if (action === 'edited' && categories.value) {

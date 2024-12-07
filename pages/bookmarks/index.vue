@@ -14,10 +14,9 @@ definePageMeta({ middleware: ['auth'] })
 const { $api } = useNuxtApp()
 const route = useRoute()
 const toast = useToast()
+const localeRoute = useLocaleRoute()
 
 const { confirmationHandler } = useConfirmationDialogStore()
-
-const categoryFormDialog = ref()
 
 const {
   data: bookmarks,
@@ -32,52 +31,40 @@ const {
 )
 
 const columns = [
-  { key: 'categoryName', label: t('fields.name.label') },
+  { key: 'title', label: t('fields.title.label') },
+  { key: 'categoryId', label: t('fields.category.label') },
   { key: 'createdAt', label: t('fields.createdAt.label') },
   { key: 'actions', class: 'w-9' }
 ]
 
-const actions = (row: ExtendedBookmark): DropdownItem[][] => {
-  const result: DropdownItem[][] = [
-    [
-      {
-        label: t('bookmark.create'),
-        icon: 'i-heroicons-plus'
-      }
-    ]
+const actions = (row: ExtendedBookmark): DropdownItem[][] => [
+  [
+    {
+      label: t('btn.edit'),
+      icon: 'i-heroicons-pencil-square',
+      click: () => navigateTo(localeRoute({ name: 'bookmarks-id-edit', params: { id: row.id } }))
+    },
+    {
+      label: t('btn.delete'),
+      icon: 'i-heroicons-trash',
+      click: () => handleBookmarkDelete(row)
+    }
   ]
+]
 
-  if (!row.isDefault) {
-    result.push([
-      {
-        label: t('btn.edit'),
-        icon: 'i-heroicons-pencil-square',
-        click: () => categoryFormDialog.value.openDialogWindow(row)
-      },
-      {
-        label: t('btn.delete'),
-        icon: 'i-heroicons-trash',
-        click: () => handleCategoryDelete(row)
-      }
-    ])
-  }
-
-  return result
-}
-
-const handleCategoryDelete = async (category: ExtendedBookmark) => {
+const handleBookmarkDelete = async (bookmark: ExtendedBookmark) => {
   const isConfirm = await confirmationHandler({
-    title: t('category.deleting'),
-    description: t('category.deletingConfirmation', { category: category.name })
+    title: t('bookmark.deleting'),
+    description: t('bookmark.deletingConfirmation', { title: bookmark.title })
   })
   if (!isConfirm) return
 
   try {
-    await $api(`api/v1/bookmarks/${category.id}/`, { method: 'DELETE' })
-    toast.add({ title: t('category.deleted') })
+    await $api(`api/v1/bookmarks/${bookmark.id}/`, { method: 'DELETE' })
+    toast.add({ title: t('bookmark.deleted') })
     await getBookmarks()
   } catch (err) {
-    useErrorHandler(err, 'Error while category deleting')
+    useErrorHandler(err, 'Error while bookmark deleting')
   }
 }
 </script>
@@ -85,7 +72,7 @@ const handleCategoryDelete = async (category: ExtendedBookmark) => {
 <template>
   <div class="flex items-center justify-between">
     <h1 class="mb-3 text-2xl font-medium md:text-3xl">{{ $t('navigation.bookmarks') }}</h1>
-    <UButton :label="$t('category.create')" icon="i-heroicons-plus" />
+    <UButton :label="$t('bookmark.create')" icon="i-heroicons-plus" :to="localeRoute({ name: 'bookmarks-create' })" />
   </div>
   <AppTable
     :rows="bookmarks?.results || []"

@@ -1,6 +1,6 @@
 {
   "validation": {
-    "required": "Це поле обов'язкове для заповнення"
+    "required": "Це поле є обов'язковим"
   },
   "auth": {
     "loginToQurlWeb": "Увійдіть у Qurl Web",
@@ -20,11 +20,27 @@
   },
   "fields": {
     "name": {
+      "label": "Ім'я",
+      "placeholder": "Введіть ім'я"
+    },
+    "createdAt": {
+      "label": "Створено"
+    },
+    "url": {
+      "label": "URL",
+      "placeholder": "Введіть URL"
+    },
+    "title": {
       "label": "Назва",
       "placeholder": "Введіть назву"
     },
-    "createdAt": {
-      "label": "Дата створення"
+    "description": {
+      "label": "Опис",
+      "placeholder": "Введіть опис"
+    },
+    "category": {
+      "label": "Категорія",
+      "placeholder": "Оберіть категорію"
     }
   },
   "btn": {
@@ -32,24 +48,25 @@
     "edit": "Редагувати",
     "delete": "Видалити",
     "confirm": "Підтвердити",
-    "cancel": "Скасувати"
+    "cancel": "Скасувати",
+    "clear": "Очистити"
   },
   "category": {
     "create": "Створити категорію",
     "creating": "Створення категорії",
-    "editing": "Редагування категорії",
     "created": "Категорію успішно створено",
-    "edited": "Категорію успішно змінено",
+    "editing": "Редагування категорії",
+    "edited": "Категорію успішно відредаговано",
     "deleting": "Видалення категорії",
     "deleted": "Категорію успішно видалено",
-    "deletingConfirmation": "Ви впевнені, що хочете видалити категорію «{category}» та всі записи, які їй належать?",
+    "deletingConfirmation": "Ви впевнені, що хочете видалити категорію «{name}» та всі записи, які до неї належать?",
     "default": {
       "Cafes and restaurants": "Кафе та ресторани",
       "Gifts": "Подарунки",
       "Entertainment": "Розваги",
       "Travel": "Подорожі",
       "Documents and Organizations": "Документи та організації",
-      "Technology and equipment": "Техніка та обладнання",
+      "Technology and equipment": "Технології та обладнання",
       "Home Goods": "Товари для дому",
       "Series and movies": "Серіали та фільми",
       "Streaming platforms and videos": "Стрімінгові платформи та відео",
@@ -57,11 +74,19 @@
     }
   },
   "bookmark": {
-    "create": "Створити закладку"
+    "create": "Створити закладку",
+    "creating": "Створення закладки",
+    "created": "Закладку створено",
+    "editing": "Редагування закладки",
+    "edited": "Закладку відредаговано",
+    "deleting": "Видалення закладки",
+    "deleted": "Закладку видалено",
+    "deletingConfirmation": "Ви впевнені, що хочете видалити закладку «{title}»?"
   },
   "greeting": "Вітаю, {name}! Раді знову бачити вас.",
   "lastPublications": "Останні публікації",
   "payAttention": "Зверніть увагу",
   "noItems": "Немає елементів",
-  "rowsPerPage": "Записів на сторінку"
+  "rowsPerPage": "Записів на сторінці",
+  "autocompleteFormFields": "Автозаповнення полів форми"
 }

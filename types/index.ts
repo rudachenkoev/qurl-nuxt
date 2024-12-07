@@ -1,4 +1,26 @@
 import type { TableRow } from '#ui/types'
+import type { RouteLocationAsRelativeGeneric } from 'vue-router'
+
+type HttpMethod = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE'
+
+export type SubmitAction = 'created' | 'edited'
+
+export type SubmitConfig = {
+  apiPath: string
+  method: HttpMethod
+  action: SubmitAction
+  navigateToParams?:
+    | string
+    | number
+    | symbol
+    | (Omit<RouteLocationAsRelativeGeneric, 'path'> & { path?: string | undefined })
+}
+
+export type PaginatedResponse = {
+  totalCount: number
+  totalPages: number
+  results: TableRow[]
+}
 
 export type Category = {
   id: number
@@ -13,13 +35,7 @@ export type Bookmark = {
   title: string
   description: string
   url: string
-  category: number | null
+  categoryId: number | undefined
   createdAt: string
   updatedAt: string
-}
-
-export type PaginatedResponse = {
-  totalCount: number
-  totalPages: number
-  results: TableRow[]
 }

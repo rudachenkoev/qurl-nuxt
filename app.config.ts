@@ -33,6 +33,11 @@ export default defineAppConfig({
       default: {
         size: 'md'
       }
+    },
+    select: {
+      default: {
+        size: 'md'
+      }
     }
   }
 })

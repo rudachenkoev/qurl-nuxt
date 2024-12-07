@@ -20,6 +20,7 @@ defineEmits<{
     <UDivider />
     <div class="flex justify-end gap-4">
       <slot name="actions">
+        <UButton variant="outline" :disabled="loading" :label="$t('btn.clear')" :ui="{ base: 'min-w-20' }" />
         <UButton type="submit" :loading="loading" :label="$t('btn.save')" :ui="{ base: 'min-w-20' }" />
       </slot>
     </div>
