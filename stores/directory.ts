@@ -1,14 +1,23 @@
+type DirectoryItem = {
+  id: number | string
+  [key: string]: any
+}
+
 export const useDirectoryStore = defineStore('directory', () => {
   const { $api } = useNuxtApp()
 
   const isDirectoriesLoaded = ref(false)
-  const categories = ref([])
+  const categories = ref<DirectoryItem[]>([])
 
-  const directories = [{ url: 'api/v1/categories', state: categories }]
+  const directories = {
+    categories
+  }
 
-  const getDirectories = async () => {
+  const directoriesInfo = [{ url: 'api/v1/categories', state: categories }]
+
+  const getDirectories = async (): Promise<void> => {
     try {
-      const fetchPromises = directories.map(async ({ url, state }) => {
+      const fetchPromises = directoriesInfo.map(async ({ url, state }) => {
         state.value = await $api(url)
       })
 
@@ -20,5 +29,22 @@ export const useDirectoryStore = defineStore('directory', () => {
     }
   }
 
-  return { categories, getDirectories, isDirectoriesLoaded }
+  const getDirectoryByKey = <T extends keyof typeof directories>(
+    directoryName: T,
+    value: any,
+    key = 'id'
+  ): DirectoryItem | null => {
+    if (!isDirectoriesLoaded.value) return null
+
+    const directoryRef = directories[directoryName]
+
+    if (!directoryRef) {
+      console.error(`Directory with name ${directoryName} not found`)
+      return null
+    }
+
+    return directoryRef.value.find(item => item[key] === value) || null
+  }
+
+  return { categories, getDirectories, getDirectoryByKey, isDirectoriesLoaded }
 })

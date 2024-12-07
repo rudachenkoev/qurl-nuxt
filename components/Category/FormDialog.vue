@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import Joi from 'joi'
 import type { FormSubmitEvent } from '#ui/types'
-import type { Category } from '~/types'
+import type { Category, SubmitAction, SubmitConfig } from '~/types'
 
 const emit = defineEmits<{
-  onSuccess: [{ action: 'created' | 'edited'; response: Category }]
+  onSuccess: [{ action: SubmitAction; response: Category }]
 }>()
 
 const { $api } = useNuxtApp()
@@ -42,15 +42,23 @@ const isLoading = ref(false)
 async function onSubmit(event: FormSubmitEvent<Partial<Category>>) {
   isLoading.value = true
 
-  const apiPath = category.value ? `api/v1/categories/${category.value.id}/` : 'api/v1/categories/'
-  const method = category.value ? 'PATCH' : 'POST'
-  const action = category.value ? 'edited' : 'created'
+  const config: SubmitConfig = category.value
+    ? {
+        apiPath: `api/v1/categories/${category.value.id}/`,
+        method: 'PATCH',
+        action: 'edited'
+      }
+    : {
+        apiPath: 'api/v1/categories/',
+        method: 'POST',
+        action: 'created'
+      }
 
   try {
-    const response: Category = await $api(apiPath, { method, body: event.data })
-    toast.add({ title: t(`category.${action}`) })
+    const response: Category = await $api(config.apiPath, { method: config.method, body: event.data })
+    toast.add({ title: t(`category.${config.action}`) })
     isVisible.value = false
-    emit('onSuccess', { action, response })
+    emit('onSuccess', { action: config.action, response })
   } catch (err) {
     useErrorHandler(err, 'Failed to create/update category')
   } finally {

@@ -15,7 +15,8 @@
     "home": "Home",
     "settings": "Settings",
     "device": "Device",
-    "bookmarks": "Bookmarks"
+    "bookmarks": "Bookmarks",
+    "categories": "Categories"
   },
   "fields": {
     "name": {
@@ -24,6 +25,22 @@
     },
     "createdAt": {
       "label": "Created at"
+    },
+    "url": {
+      "label": "URL",
+      "placeholder": "Enter URL"
+    },
+    "title": {
+      "label": "Title",
+      "placeholder": "Enter title"
+    },
+    "description": {
+      "label": "Description",
+      "placeholder": "Enter description"
+    },
+    "category": {
+      "label": "Category",
+      "placeholder": "Select category"
     }
   },
   "btn": {
@@ -31,17 +48,18 @@
     "edit": "Edit",
     "delete": "Delete",
     "confirm": "Confirm",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "clear": "Clear"
   },
   "category": {
     "create": "Create category",
     "creating": "Category creating",
-    "editing": "Category editing",
     "created": "Category has been successfully created",
+    "editing": "Category editing",
     "edited": "Category has been successfully edited",
     "deleting": "Category deleting",
     "deleted": "Category has been successfully deleted",
-    "deletingConfirmation": "Are you sure you want to delete the category “{category}” and all the entries that belong to it?",
+    "deletingConfirmation": "Are you sure you want to delete the category “{name}” and all the entries that belong to it?",
     "default": {
       "Cafes and restaurants": "Cafes and restaurants",
       "Gifts": "Gifts",
@@ -56,11 +74,20 @@
     }
   },
   "bookmark": {
-    "create": "Create bookmark"
+    "create": "Create bookmark",
+    "creating": "Bookmark creating",
+    "created": "Bookmark created",
+    "editing": "Bookmark editing",
+    "edited": "Bookmark edited",
+    "deleting": "Bookmark deleting",
+    "deleted": "Bookmark deleted",
+    "deletingConfirmation": "Are you sure you want to delete the bookmark “{title}”?"
   },
   "greeting": "Hello, {name}! It's good to see you again.",
   "lastPublications": "Last publications",
   "payAttention": "Pay attention",
   "noItems": "No items",
-  "rowsPerPage": "Rows per page"
+  "rowsPerPage": "Rows per page",
+  "autocompleteFormFields": "Autocomplete form fields",
+  "clearFormConfirmation": "Unsaved changes will be lost. Are you sure you want to clear the form?"
 }

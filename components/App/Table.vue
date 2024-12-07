@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { TableRow, TableColumn, DropdownItem } from '#ui/types'
+import { useDirectoryStore } from '~/stores/directory'
 
 interface Props<RowType extends TableRow = TableRow> {
   rows: TableRow[]
@@ -12,6 +13,7 @@ const { rows = [], columns, loading = false, totalCount = 0 } = defineProps<Prop
 
 const route = useRoute()
 const localeRoute = useLocaleRoute()
+const { getDirectoryByKey } = useDirectoryStore()
 
 const page = ref(route.query.page ? +route.query.page : 1)
 const pageCount = ref(route.query.pageCount ? +route.query.pageCount : 10)
@@ -28,9 +30,13 @@ watch(pageCount, value => {
     :loading="loading"
     :empty-state="{ icon: 'i-heroicons-circle-stack', label: $t('noItems') }"
   >
-    <template #categoryName-data="{ row }">{{
-      row.isDefault ? $t(`category.default.${row.name}`) : row.name
-    }}</template>
+    <template #categoryId-data="{ row }">
+      {{ getDirectoryByKey('categories', row.categoryId)?.name || '--' }}
+    </template>
+
+    <template #categoryName-data="{ row }">
+      {{ row.isDefault ? $t(`category.default.${row.name}`) : row.name }}
+    </template>
 
     <template #createdAt-data="{ row }">{{ useFormatDate(new Date(row.createdAt)) }}</template>
 

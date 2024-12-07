@@ -8,6 +8,7 @@ const { user } = storeToRefs(useUserStore())
 
 const links = computed<VerticalNavigationLink[]>(() => [
   { icon: 'i-heroicons-home', label: t('navigation.home'), to: localeRoute({ name: 'index' }) },
+  { icon: 'i-heroicons-archive-box', label: t('navigation.categories'), to: localeRoute({ name: 'categories' }) },
   { icon: 'i-heroicons-bookmark', label: t('navigation.bookmarks'), to: localeRoute({ name: 'bookmarks' }) },
   { icon: 'i-heroicons-cog-6-tooth', label: t('navigation.settings'), to: localeRoute({ name: 'settings' }) }
 ])
