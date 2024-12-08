@@ -3,9 +3,11 @@ import Joi from 'joi'
 import type { Bookmark, SubmitConfig } from '~/types'
 import type { FormSubmitEvent } from '#ui/types'
 import { useDirectoryStore } from '~/stores/directory'
+import { useUserStore } from '~/stores/user'
 
 const { $api } = useNuxtApp()
 const { categories } = storeToRefs(useDirectoryStore())
+const { contacts } = storeToRefs(useUserStore())
 const route = useRoute()
 const localeRoute = useLocaleRoute()
 const toast = useToast()
@@ -25,14 +27,16 @@ const schema = useValidationSchema({
   title: Joi.string().required(),
   description: Joi.string().optional(),
   url: Joi.string().uri().required(),
-  categoryId: Joi.number().required()
+  categoryId: Joi.number().required(),
+  contacts: Joi.array().items(Joi.number()).optional()
 })
 
 const state = reactive<Partial<Bookmark>>({
   title: '',
   description: '',
   url: '',
-  categoryId: undefined
+  categoryId: undefined,
+  contacts: []
 })
 
 const isUrlAutocompleting = ref(false)
@@ -126,13 +130,23 @@ onMounted(() => {
       />
     </UFormGroup>
     <UFormGroup :label="$t('fields.category.label')" name="category">
-      <USelect
+      <USelectMenu
         v-model="state.categoryId as number | undefined"
         :options="categories"
         option-attribute="name"
         value-attribute="id"
         :placeholder="$t('fields.category.placeholder')"
         :disabled="isUrlAutocompleting"
+      />
+    </UFormGroup>
+    <UFormGroup :label="$t('fields.contact.label')" name="contacts">
+      <USelectMenu
+        v-model="state.contacts"
+        :options="contacts"
+        option-attribute="name"
+        value-attribute="id"
+        multiple
+        :placeholder="$t('fields.contact.placeholder')"
       />
     </UFormGroup>
   </AppFormWrapper>

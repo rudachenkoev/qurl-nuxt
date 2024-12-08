@@ -1,11 +1,16 @@
 <script setup lang="ts">
 import { useDirectoryStore } from '~/stores/directory'
+import { useUserStore } from '~/stores/user'
 
 const directoryStore = useDirectoryStore()
 const { getDirectories } = directoryStore
 const { isDirectoriesLoaded } = storeToRefs(directoryStore)
 
-if (!isDirectoriesLoaded.value) getDirectories()
+const userStore = useUserStore()
+const { getCurrentUserContacts } = userStore
+const { isContactsLoaded } = storeToRefs(userStore)
+
+Promise.all([!isDirectoriesLoaded.value && getDirectories(), !isContactsLoaded.value && getCurrentUserContacts()])
 </script>
 
 <template>

@@ -15,5 +15,25 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
-  return { user, getCurrentUser }
+  interface Contact {
+    id: string
+    externalId: string
+    name: string
+    birthday: string
+    createdAt: string
+    updatedAt: string
+  }
+  const isContactsLoaded = ref(false)
+  const contacts = ref<Contact[]>([])
+  const getCurrentUserContacts = async () => {
+    try {
+      contacts.value = await $api('api/v1/accounts/contacts/')
+      isContactsLoaded.value = true
+      return contacts.value
+    } catch (err) {
+      useErrorHandler(err, 'Get current user contacts error')
+    }
+  }
+
+  return { user, getCurrentUser, contacts, isContactsLoaded, getCurrentUserContacts }
 })
