@@ -41,6 +41,11 @@
     "category": {
       "label": "Category",
       "placeholder": "Select category"
+    },
+    "contact": {
+      "label": "Phone number contact",
+      "placeholder": "Select contact",
+      "searchPlaceholder": "Search a contact..."
     }
   },
   "btn": {

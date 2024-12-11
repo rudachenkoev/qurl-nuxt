@@ -30,6 +30,15 @@ export type Category = {
   updatedAt: string
 }
 
+export type Contact = {
+  id: string
+  externalId: string
+  name: string
+  birthday: string
+  createdAt: string
+  updatedAt: string
+}
+
 export type Bookmark = {
   id: number
   title: string
@@ -38,4 +47,5 @@ export type Bookmark = {
   categoryId: number | undefined
   createdAt: string
   updatedAt: string
+  contacts: string[]
 }
