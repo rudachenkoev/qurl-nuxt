@@ -41,7 +41,8 @@ export default defineAppConfig({
     },
     selectMenu: {
       default: {
-        size: 'md'
+        size: 'md',
+        clearSearchOnClose: true
       }
     }
   }

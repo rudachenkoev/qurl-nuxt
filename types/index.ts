@@ -47,5 +47,5 @@ export type Bookmark = {
   categoryId: number | undefined
   createdAt: string
   updatedAt: string
-  contacts: number[]
+  contacts: string[]
 }
