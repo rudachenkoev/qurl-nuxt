@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { TableRow, DropdownItem } from '#ui/types'
 import { useConfirmationDialogStore } from '~/stores/confirmationDialog'
-import type { Category, PaginatedResponse, SubmitAction } from '~/types'
+import type { Category, FormattedResponse, SubmitAction } from '~/types'
+import { deleteCategory, getCategories } from '~/services/categoriesService'
 
 type ExtendedCategory = TableRow & Category
 
@@ -11,7 +12,6 @@ useHead({
 })
 definePageMeta({ middleware: ['auth'] })
 
-const { $api } = useNuxtApp()
 const route = useRoute()
 const toast = useToast()
 const localeRoute = useLocaleRoute()
@@ -23,14 +23,10 @@ const categoryFormDialog = ref()
 const {
   data: categories,
   status,
-  refresh: getCategories
-} = await useLazyAsyncData<PaginatedResponse>(
-  'categories',
-  () => $api('api/v1/categories/', { query: setDefaultQuery(route.query) }),
-  {
-    watch: [() => route.query]
-  }
-)
+  refresh: refreshCategories
+} = await useLazyAsyncData<FormattedResponse>('categories', () => getCategories(setDefaultQuery(route.query)), {
+  watch: [() => route.query]
+})
 
 const columns = [
   { key: 'categoryName', label: t('fields.name.label') },
@@ -75,9 +71,9 @@ const handleCategoryDelete = async (category: ExtendedCategory) => {
   if (!isConfirm) return
 
   try {
-    await $api(`api/v1/categories/${category.id}/`, { method: 'DELETE' })
+    await deleteCategory(category.id)
     toast.add({ title: t('category.deleted') })
-    await getCategories()
+    await refreshCategories()
   } catch (err) {
     useErrorHandler(err, 'Error while category deleting')
   }
@@ -85,9 +81,9 @@ const handleCategoryDelete = async (category: ExtendedCategory) => {
 
 const handleCategoryUpdate = ({ action, response }: { action: SubmitAction; response: Category }) => {
   if (action === 'created') {
-    getCategories()
-  } else if (action === 'edited' && categories.value) {
-    const index = (categories.value.results as Category[]).findIndex(category => category.id === response.id)
+    refreshCategories()
+  } else if (action === 'edited' && categories.value && isPaginatedResponse(categories.value)) {
+    const index = categories.value.results.findIndex(category => category.id === response.id)
     if (index !== -1) categories.value.results.splice(index, 1, response)
   }
 }
@@ -100,8 +96,8 @@ const handleCategoryUpdate = ({ action, response }: { action: SubmitAction; resp
     <CategoryFormDialog ref="categoryFormDialog" @onSuccess="handleCategoryUpdate" />
   </div>
   <AppTable
-    :rows="categories?.results || []"
-    :total-count="categories?.totalCount || 0"
+    :rows="isPaginatedResponse(categories) ? categories.results : []"
+    :total-count="isPaginatedResponse(categories) ? categories.totalCount : 0"
     :columns="columns"
     :loading="status === 'pending'"
     :actions="actions"

@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import Joi from 'joi'
 import type { FormSubmitEvent } from '#ui/types'
-import type { Category, SubmitAction, SubmitConfig } from '~/types'
+import type { Category, SubmitAction } from '~/types'
+import { createBookmark, updateBookmark } from '~/services/categoriesService'
 
 const emit = defineEmits<{
   onSuccess: [{ action: SubmitAction; response: Category }]
 }>()
 
-const { $api } = useNuxtApp()
 const toast = useToast()
 const { t } = useI18n()
 
@@ -42,23 +42,17 @@ const isLoading = ref(false)
 async function onSubmit(event: FormSubmitEvent<Partial<Category>>) {
   isLoading.value = true
 
-  const config: SubmitConfig = category.value
-    ? {
-        apiPath: `api/v1/categories/${category.value.id}/`,
-        method: 'PATCH',
-        action: 'edited'
-      }
-    : {
-        apiPath: 'api/v1/categories/',
-        method: 'POST',
-        action: 'created'
-      }
-
   try {
-    const response: Category = await $api(config.apiPath, { method: config.method, body: event.data })
-    toast.add({ title: t(`category.${config.action}`) })
+    if (category.value) {
+      const response = await updateBookmark(category.value.id, event.data)
+      toast.add({ title: t('category.edited') })
+      emit('onSuccess', { action: 'edited', response })
+    } else {
+      const response = await createBookmark(event.data)
+      toast.add({ title: t('category.created') })
+      emit('onSuccess', { action: 'created', response })
+    }
     isVisible.value = false
-    emit('onSuccess', { action: config.action, response })
   } catch (err) {
     useErrorHandler(err, 'Failed to create/update category')
   } finally {

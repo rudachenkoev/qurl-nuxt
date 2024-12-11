@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import Pusher from 'pusher-js'
+import type { Channel } from '~/types'
+import { getAuthChannel } from '~/services/authService'
 
-const { $api } = useNuxtApp()
 const config = useRuntimeConfig()
 const localeRoute = useLocaleRoute()
 
@@ -17,13 +18,10 @@ const initPusher = () => {
 
 const channel = ref('')
 // Function to fetch and update the channel
-type ChannelResponse = {
-  channel: string
-}
 const getChannel = async () => {
   try {
     handleChannelUnsubscribe()
-    const response: ChannelResponse = await $api('api/v1/auth/channel/')
+    const response: Channel = await getAuthChannel()
     channel.value = response.channel
     return response
   } catch (err) {

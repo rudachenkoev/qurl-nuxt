@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import type { TableRow, DropdownItem } from '#ui/types'
 import { useConfirmationDialogStore } from '~/stores/confirmationDialog'
-import type { Bookmark, PaginatedResponse } from '~/types'
+import type { Bookmark, FormattedResponse } from '~/types'
+import { deleteBookmark, getBookmarks } from '~/services/bookmarksService'
 
-type ExtendedBookmark = TableRow & Bookmark
+type ExtendedBookmark = Bookmark & TableRow
 
 const { t } = useI18n()
 useHead({
@@ -11,7 +12,6 @@ useHead({
 })
 definePageMeta({ middleware: ['auth'] })
 
-const { $api } = useNuxtApp()
 const route = useRoute()
 const toast = useToast()
 const localeRoute = useLocaleRoute()
@@ -21,14 +21,10 @@ const { confirmationHandler } = useConfirmationDialogStore()
 const {
   data: bookmarks,
   status,
-  refresh: getBookmarks
-} = await useLazyAsyncData<PaginatedResponse>(
-  'bookmarks',
-  () => $api('api/v1/bookmarks/', { query: setDefaultQuery(route.query) }),
-  {
-    watch: [() => route.query]
-  }
-)
+  refresh: refreshBookmarks
+} = await useLazyAsyncData<FormattedResponse>('bookmarks', () => getBookmarks(setDefaultQuery(route.query)), {
+  watch: [() => route.query]
+})
 
 const columns = [
   { key: 'title', label: t('fields.title.label') },
@@ -60,9 +56,9 @@ const handleBookmarkDelete = async (bookmark: ExtendedBookmark) => {
   if (!isConfirm) return
 
   try {
-    await $api(`api/v1/bookmarks/${bookmark.id}/`, { method: 'DELETE' })
+    await deleteBookmark(bookmark.id)
     toast.add({ title: t('bookmark.deleted') })
-    await getBookmarks()
+    await refreshBookmarks()
   } catch (err) {
     useErrorHandler(err, 'Error while bookmark deleting')
   }
@@ -75,8 +71,8 @@ const handleBookmarkDelete = async (bookmark: ExtendedBookmark) => {
     <UButton :label="$t('bookmark.create')" icon="i-heroicons-plus" :to="localeRoute({ name: 'bookmarks-create' })" />
   </div>
   <AppTable
-    :rows="bookmarks?.results || []"
-    :total-count="bookmarks?.totalCount || 0"
+    :rows="isPaginatedResponse(bookmarks) ? bookmarks.results : []"
+    :total-count="isPaginatedResponse(bookmarks) ? bookmarks.totalCount : 0"
     :columns="columns"
     :loading="status === 'pending'"
     :actions="actions"

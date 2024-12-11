@@ -1,16 +1,15 @@
 <script setup lang="ts">
-import type { TableRow } from '#ui/types'
+import { getBookmarks } from '~/services/bookmarksService'
+import type { FormattedResponse } from '~/types'
 
-const { $api } = useNuxtApp()
-
-const { data: lastPublications, status } = await useLazyAsyncData<TableRow[]>('lastPublications', () =>
-  $api('api/v1/bookmarks/', { query: { ordering: 'createdAt' } })
+const { data: lastPublications, status } = await useLazyAsyncData<FormattedResponse>('lastPublications', () =>
+  getBookmarks({ ordering: 'createdAt' })
 )
 </script>
 
 <template>
   <h1 class="text-xl font-medium">{{ $t('lastPublications') }}</h1>
-  <AppTable :rows="lastPublications || []" :loading="status === 'pending'" />
+  <AppTable :rows="isNotPaginatedResponse(lastPublications) ? lastPublications : []" :loading="status === 'pending'" />
 </template>
 
 <style scoped></style>

@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import Joi from 'joi'
-import type { Bookmark, SubmitConfig } from '~/types'
+import type { Bookmark } from '~/types'
 import type { FormSubmitEvent } from '#ui/types'
 import { useDirectoryStore } from '~/stores/directory'
 import { useUserStore } from '~/stores/user'
-import { getBookmark } from '~/services/bookmarksService'
+import { createBookmark, getBookmark, getBookmarkAutocompleteData, updateBookmark } from '~/services/bookmarksService'
 
-const { $api } = useNuxtApp()
 const { categories } = storeToRefs(useDirectoryStore())
 const { contacts } = storeToRefs(useUserStore())
 const route = useRoute()
@@ -53,12 +52,11 @@ const state = reactive<Partial<Bookmark>>({
 
 const isUrlAutocompleting = ref(false)
 const autocompleteUrlData = async () => {
+  if (!state.url) return
+
   isUrlAutocompleting.value = true
   try {
-    const data: Partial<Bookmark> = await $api('api/v1/bookmarks/autocomplete-url-data/', {
-      method: 'POST',
-      body: { url: state.url }
-    })
+    const data = await getBookmarkAutocompleteData({ url: state.url })
     Object.assign(state, data)
   } catch (err) {
     useErrorHandler(err, 'Failed to autocomplete fields by URL')
@@ -70,26 +68,18 @@ const autocompleteUrlData = async () => {
 const isLoading = ref(false)
 const onSubmit = async (event: FormSubmitEvent<Partial<Bookmark>>) => {
   isLoading.value = true
-
-  const id = route.params.id
-  const config: SubmitConfig = isCreatingRoute
-    ? {
-        apiPath: 'api/v1/bookmarks/',
-        method: 'POST',
-        action: 'created',
-        navigateToParams: { name: 'bookmarks' }
-      }
-    : {
-        apiPath: `api/v1/bookmarks/${id}/`,
-        method: 'PATCH',
-        action: 'edited',
-        navigateToParams: { name: 'bookmarks-id', params: { id } }
-      }
+  const id = route.params.id as string
 
   try {
-    await $api(config.apiPath, { method: config.method, body: event.data })
-    toast.add({ title: t(`bookmark.${config.action}`) })
-    if (config.navigateToParams) navigateTo(localeRoute(config.navigateToParams))
+    if (isCreatingRoute) {
+      await createBookmark(event.data)
+      toast.add({ title: t('bookmark.created') })
+      navigateTo(localeRoute({ name: 'bookmarks' }))
+    } else {
+      await updateBookmark(id, event.data)
+      toast.add({ title: t('bookmark.edited') })
+      navigateTo(localeRoute({ name: 'bookmarks-id', params: { id } }))
+    }
   } catch (err) {
     useErrorHandler(err, 'Failed to create/update bookmark')
   } finally {
