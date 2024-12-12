@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import Joi from 'joi'
-import type { Bookmark } from '~/types'
+import type { Bookmark, Category } from '~/types'
 import type { FormSubmitEvent } from '#ui/types'
 import { useDirectoryStore } from '~/stores/directory'
 import { useUserStore } from '~/stores/user'
 import { createBookmark, getBookmark, getBookmarkAutocompleteData, updateBookmark } from '~/services/bookmarksService'
 
-const { categories } = storeToRefs(useDirectoryStore())
+const directoryStore = useDirectoryStore()
+const { categories } = storeToRefs(directoryStore)
+const { getDirectoryByKey } = directoryStore
 const { contacts } = storeToRefs(useUserStore())
 const route = useRoute()
 const localeRoute = useLocaleRoute()
@@ -49,6 +51,7 @@ const state = reactive<Partial<Bookmark>>({
   categoryId: undefined,
   contacts: []
 })
+const categoriesSuggestion = ref<Category[]>([])
 
 const isUrlAutocompleting = ref(false)
 const autocompleteUrlData = async () => {
@@ -57,7 +60,20 @@ const autocompleteUrlData = async () => {
   isUrlAutocompleting.value = true
   try {
     const data = await getBookmarkAutocompleteData({ url: state.url })
-    Object.assign(state, data)
+
+    state.title = data.title
+    state.description = data.description
+
+    const highScoreLabelIndex = data.classification.scores.findIndex((score: number) => score > 0.7)
+    if (highScoreLabelIndex !== -1) {
+      categoriesSuggestion.value = []
+      state.categoryId = getDirectoryByKey('categories', data.classification.labels[highScoreLabelIndex], 'name')?.id
+    } else {
+      state.categoryId = undefined
+      categoriesSuggestion.value = data.classification.labels.map(label => {
+        return getDirectoryByKey('categories', label, 'name') as Category
+      })
+    }
   } catch (err) {
     useErrorHandler(err, 'Failed to autocomplete fields by URL')
   } finally {
@@ -133,13 +149,24 @@ onMounted(() => {
     </UFormGroup>
     <UFormGroup :label="$t('fields.category.label')" name="category">
       <USelectMenu
-        v-model="state.categoryId as number | undefined"
+        v-model="state.categoryId"
         :options="categories"
         option-attribute="name"
         value-attribute="id"
         :placeholder="$t('fields.category.placeholder')"
         :disabled="isUrlAutocompleting"
       />
+      <div v-if="categoriesSuggestion.length" class="mt-2 flex flex-wrap items-center gap-3">
+        <p class="text-sm text-shark-800 dark:text-shark-300">{{ $t('possibleOptions') }}:</p>
+        <UButton
+          v-for="suggestion in categoriesSuggestion"
+          :label="suggestion.name"
+          size="2xs"
+          :disabled="state.categoryId === suggestion.id"
+          :ui="{ rounded: 'rounded-full' }"
+          @click="state.categoryId = suggestion.id"
+        />
+      </div>
     </UFormGroup>
     <UFormGroup :label="$t('fields.contact.label')" name="contacts">
       <USelectMenu

@@ -1,5 +1,5 @@
-type DirectoryItem = {
-  id: number | string
+export type DirectoryItem = {
+  id: number
   [key: string]: any
 }
 

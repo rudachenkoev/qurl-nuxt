@@ -14,5 +14,10 @@ export const updateBookmark = (id: string | number, data: Partial<Bookmark>) =>
 
 export const deleteBookmark = (id: string | number) => useApiCall<any>(`api/v1/bookmarks/${id}/`, { method: 'DELETE' })
 
+type AutocompleteResponse = {
+  title: string
+  description: string
+  classification: { labels: string[]; scores: number[] }
+}
 export const getBookmarkAutocompleteData = (data: { url: string }) =>
-  useApiCall<Partial<Bookmark>>(`api/v1/bookmarks/autocomplete-url-data/`, { method: 'POST', body: data })
+  useApiCall<AutocompleteResponse>(`api/v1/bookmarks/autocomplete-url-data/`, { method: 'POST', body: data })

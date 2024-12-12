@@ -94,5 +94,6 @@
   "noItems": "No items",
   "rowsPerPage": "Rows per page",
   "autocompleteFormFields": "Autocomplete form fields",
-  "clearFormConfirmation": "Unsaved changes will be lost. Are you sure you want to clear the form?"
+  "clearFormConfirmation": "Unsaved changes will be lost. Are you sure you want to clear the form?",
+  "possibleOptions": "Possible options"
 }
