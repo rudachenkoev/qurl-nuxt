@@ -1,6 +1,7 @@
 {
   "validation": {
-    "required": "This field is required"
+    "required": "This field is required",
+    "uri": " Must be valid URI"
   },
   "auth": {
     "loginToQurlWeb": "Log into Qurl Web",

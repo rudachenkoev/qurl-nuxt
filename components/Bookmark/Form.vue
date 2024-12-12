@@ -37,10 +37,10 @@ if (!isCreatingRoute) {
 }
 
 const schema = useValidationSchema({
-  title: Joi.string().required(),
-  description: Joi.string().optional(),
   url: Joi.string().uri().required(),
-  categoryId: Joi.alternatives().try(Joi.string().required(), Joi.number().required()),
+  title: Joi.string().required(),
+  description: Joi.string().allow('').optional(),
+  categoryId: Joi.alternatives().try(Joi.string(), Joi.number()).required(),
   contacts: Joi.array().items(Joi.string()).optional()
 })
 
@@ -149,7 +149,7 @@ onMounted(() => {
         autoresize
       />
     </UFormGroup>
-    <UFormGroup :label="$t('fields.category.label')" name="category">
+    <UFormGroup :label="$t('fields.category.label')" name="categoryId">
       <USelectMenu
         v-model="state.categoryId"
         :options="categories"

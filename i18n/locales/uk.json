@@ -1,6 +1,7 @@
 {
   "validation": {
-    "required": "Це поле є обов'язковим"
+    "required": "Це поле є обов'язковим",
+    "uri": " Має бути дійсним URI"
   },
   "auth": {
     "loginToQurlWeb": "Увійдіть у Qurl Web",
