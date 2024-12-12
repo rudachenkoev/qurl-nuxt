@@ -8,7 +8,7 @@ import { createBookmark, getBookmark, getBookmarkAutocompleteData, updateBookmar
 
 const directoryStore = useDirectoryStore()
 const { categories } = storeToRefs(directoryStore)
-const { getDirectoryByKey } = directoryStore
+const { getDirectoryByKey, getCategories } = directoryStore
 const { contacts } = storeToRefs(useUserStore())
 const route = useRoute()
 const localeRoute = useLocaleRoute()
@@ -40,7 +40,7 @@ const schema = useValidationSchema({
   title: Joi.string().required(),
   description: Joi.string().optional(),
   url: Joi.string().uri().required(),
-  categoryId: Joi.number().required(),
+  categoryId: Joi.alternatives().try(Joi.string().required(), Joi.number().required()),
   contacts: Joi.array().items(Joi.string()).optional()
 })
 
@@ -89,10 +89,12 @@ const onSubmit = async (event: FormSubmitEvent<Partial<Bookmark>>) => {
   try {
     if (isCreatingRoute) {
       await createBookmark(event.data)
+      if (typeof event.data.categoryId === 'string') await getCategories()
       toast.add({ title: t('bookmark.created') })
       navigateTo(localeRoute({ name: 'bookmarks' }))
     } else {
       await updateBookmark(id, event.data)
+      if (typeof event.data.categoryId === 'string') await getCategories()
       toast.add({ title: t('bookmark.edited') })
       navigateTo(localeRoute({ name: 'bookmarks-id', params: { id } }))
     }
@@ -154,8 +156,19 @@ onMounted(() => {
         option-attribute="name"
         value-attribute="id"
         :placeholder="$t('fields.category.placeholder')"
+        :searchable-placeholder="$t('fields.category.searchPlaceholder')"
         :disabled="isUrlAutocompleting"
-      />
+        searchable
+        creatable
+      >
+        <template #label>
+          <span v-if="state.categoryId && Number.isInteger(state.categoryId)">
+            {{ getDirectoryByKey('categories', state.categoryId)?.name }}
+          </span>
+          <span v-else-if="state.categoryId">{{ state.categoryId }}</span>
+          <span v-else>{{ $t('fields.category.placeholder') }}</span>
+        </template>
+      </USelectMenu>
       <div v-if="categoriesSuggestion.length" class="mt-2 flex flex-wrap items-center gap-3">
         <p class="text-sm text-shark-800 dark:text-shark-300">{{ $t('possibleOptions') }}:</p>
         <UButton

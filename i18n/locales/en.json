@@ -40,7 +40,8 @@
     },
     "category": {
       "label": "Category",
-      "placeholder": "Select category"
+      "placeholder": "Select category",
+      "searchPlaceholder": "Search a category..."
     },
     "contact": {
       "label": "Phone number contact",

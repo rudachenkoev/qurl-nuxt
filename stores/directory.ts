@@ -46,5 +46,13 @@ export const useDirectoryStore = defineStore('directory', () => {
     return directoryRef.value.find(item => item[key] === value) || null
   }
 
-  return { categories, getDirectories, getDirectoryByKey, isDirectoriesLoaded }
+  const getCategories = async () => {
+    try {
+      categories.value = await $api('api/v1/categories')
+    } catch (err) {
+      console.error('Failed to fetch categories:', err)
+    }
+  }
+
+  return { categories, getDirectories, getDirectoryByKey, isDirectoriesLoaded, getCategories }
 })

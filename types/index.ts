@@ -25,7 +25,7 @@ export type Bookmark = {
   title: string
   description: string
   url: string
-  categoryId: number | undefined
+  categoryId: number | string | undefined
   createdAt: string
   updatedAt: string
   contacts: string[]
