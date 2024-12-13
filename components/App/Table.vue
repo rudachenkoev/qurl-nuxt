@@ -17,6 +17,17 @@ const { getDirectoryByKey } = useDirectoryStore()
 
 const page = ref(route.query.page ? +route.query.page : 1)
 const pageCount = ref(route.query.pageCount ? +route.query.pageCount : 10)
+
+const getFaviconUrl = (url: string) => {
+  try {
+    const { host } = new URL(url)
+    return `https://www.google.com/s2/favicons?domain=${host}&sz=32`
+  } catch (err) {
+    console.error('Invalid URL provided:', url, err)
+    return undefined
+  }
+}
+
 watch(pageCount, value => {
   page.value = 1
   navigateTo(localeRoute({ query: { ...route.query, page: 1, pageCount: value } }))
@@ -30,6 +41,13 @@ watch(pageCount, value => {
     :loading="loading"
     :empty-state="{ icon: 'i-heroicons-circle-stack', label: $t('noItems') }"
   >
+    <template #bookmarkTitle-data="{ row }">
+      <div class="flex items-center gap-x-2">
+        <NuxtImg :src="getFaviconUrl(row.url)" width="24" height="24" :alt="`${row.title}-favicon`" />
+        <span>{{ row.title }}</span>
+      </div>
+    </template>
+
     <template #categoryId-data="{ row }">
       {{ getDirectoryByKey('categories', row.categoryId)?.name || '--' }}
     </template>

@@ -27,7 +27,7 @@ const {
 })
 
 const columns = [
-  { key: 'title', label: t('fields.title.label') },
+  { key: 'bookmarkTitle', label: t('fields.title.label') },
   { key: 'categoryId', label: t('fields.category.label') },
   { key: 'createdAt', label: t('fields.createdAt.label') },
   { key: 'actions', class: 'w-9' }
