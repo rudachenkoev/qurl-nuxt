@@ -1,9 +1,9 @@
 <script setup lang="ts">
+definePageMeta({ layout: 'auth', middleware: ['auth'], title: 'auth.loginToQurlWeb' })
 const { t } = useI18n()
 useHead({
   title: t('auth.loginToQurlWeb')
 })
-definePageMeta({ layout: 'auth', middleware: ['auth'] })
 
 const authTabsFlow = ['settings', 'device']
 </script>

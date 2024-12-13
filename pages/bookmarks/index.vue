@@ -6,11 +6,11 @@ import { deleteBookmark, getBookmarks } from '~/services/bookmarksService'
 
 type ExtendedBookmark = Bookmark & TableRow
 
+definePageMeta({ middleware: ['auth'], title: 'navigation.bookmarks' })
 const { t } = useI18n()
 useHead({
   title: t('navigation.bookmarks')
 })
-definePageMeta({ middleware: ['auth'] })
 
 const route = useRoute()
 const toast = useToast()

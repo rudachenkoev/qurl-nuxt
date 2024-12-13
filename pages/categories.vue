@@ -6,11 +6,11 @@ import { deleteCategory, getCategories } from '~/services/categoriesService'
 
 type ExtendedCategory = TableRow & Category
 
+definePageMeta({ middleware: ['auth'], title: 'navigation.categories' })
 const { t } = useI18n()
 useHead({
   title: t('navigation.categories')
 })
-definePageMeta({ middleware: ['auth'] })
 
 const route = useRoute()
 const toast = useToast()

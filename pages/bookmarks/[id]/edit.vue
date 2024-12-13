@@ -1,9 +1,9 @@
 <script setup lang="ts">
+definePageMeta({ middleware: ['auth'], title: 'bookmark.editing' })
 const { t } = useI18n()
 useHead({
   title: t('bookmark.editing')
 })
-definePageMeta({ middleware: ['auth'] })
 </script>
 
 <template>

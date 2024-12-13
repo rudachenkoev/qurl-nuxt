@@ -1,9 +1,9 @@
 <script setup lang="ts">
+definePageMeta({ middleware: ['auth'], title: 'navigation.home' })
 const { t } = useI18n()
 useHead({
   title: t('navigation.home')
 })
-definePageMeta({ middleware: ['auth'] })
 </script>
 
 <template>

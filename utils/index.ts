@@ -14,3 +14,13 @@ export function updateStateFields<T>(state: Partial<T>, newState: T) {
     }
   }
 }
+
+export const getFaviconUrl = (url: string) => {
+  try {
+    const { host } = new URL(url)
+    return `https://www.google.com/s2/favicons?domain=${host}&sz=32`
+  } catch (err) {
+    console.error('Invalid URL provided:', url, err)
+    return undefined
+  }
+}

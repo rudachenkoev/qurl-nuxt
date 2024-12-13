@@ -14,18 +14,14 @@ const { rows = [], columns, loading = false, totalCount = 0 } = defineProps<Prop
 const route = useRoute()
 const localeRoute = useLocaleRoute()
 const { getDirectoryByKey } = useDirectoryStore()
+const { t } = useI18n()
 
 const page = ref(route.query.page ? +route.query.page : 1)
 const pageCount = ref(route.query.pageCount ? +route.query.pageCount : 10)
 
-const getFaviconUrl = (url: string) => {
-  try {
-    const { host } = new URL(url)
-    return `https://www.google.com/s2/favicons?domain=${host}&sz=32`
-  } catch (err) {
-    console.error('Invalid URL provided:', url, err)
-    return undefined
-  }
+const getCategoryTitle = (category: any) => {
+  if (!category) return ''
+  return category.isDefault ? t(`category.default.${category.name}`) : category.name
 }
 
 watch(pageCount, value => {
@@ -49,11 +45,11 @@ watch(pageCount, value => {
     </template>
 
     <template #categoryId-data="{ row }">
-      {{ getDirectoryByKey('categories', row.categoryId)?.name || '--' }}
+      {{ getCategoryTitle(getDirectoryByKey('categories', row.categoryId)) }}
     </template>
 
     <template #categoryName-data="{ row }">
-      {{ row.isDefault ? $t(`category.default.${row.name}`) : row.name }}
+      {{ getCategoryTitle(row) }}
     </template>
 
     <template #createdAt-data="{ row }">{{ useFormatDate(new Date(row.createdAt)) }}</template>
