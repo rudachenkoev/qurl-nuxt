@@ -1,17 +1,29 @@
 <script setup lang="ts">
 import type { VerticalNavigationLink } from '#ui/types'
 import { useUserStore } from '~/stores/user'
+import type { RouteLocation } from 'vue-router'
 
 const localeRoute = useLocaleRoute()
 const { t } = useI18n()
 const { user } = storeToRefs(useUserStore())
+const route = useRoute()
 
-const links = computed<VerticalNavigationLink[]>(() => [
-  { icon: 'i-heroicons-home', label: t('navigation.home'), to: localeRoute({ name: 'index' }) },
-  { icon: 'i-heroicons-archive-box', label: t('navigation.categories'), to: localeRoute({ name: 'categories' }) },
-  { icon: 'i-heroicons-bookmark', label: t('navigation.bookmarks'), to: localeRoute({ name: 'bookmarks' }) },
-  { icon: 'i-heroicons-cog-6-tooth', label: t('navigation.settings'), to: localeRoute({ name: 'settings' }) }
-])
+const isActiveLink = (link: RouteLocation, exact = false) => {
+  if (!link) return false
+  return exact ? route.path === link.path : route.path.startsWith(link.path)
+}
+
+const links = computed<VerticalNavigationLink[]>(() => {
+  return [
+    { icon: 'i-heroicons-home', label: t('navigation.home'), to: localeRoute({ name: 'index' }), exact: true },
+    { icon: 'i-heroicons-archive-box', label: t('navigation.categories'), to: localeRoute({ name: 'categories' }) },
+    { icon: 'i-heroicons-bookmark', label: t('navigation.bookmarks'), to: localeRoute({ name: 'bookmarks' }) },
+    { icon: 'i-heroicons-cog-6-tooth', label: t('navigation.settings'), to: localeRoute({ name: 'settings' }) }
+  ].map(link => ({
+    ...link,
+    active: link.to ? isActiveLink(link.to, link.exact) : false
+  }))
+})
 </script>
 
 <template>
