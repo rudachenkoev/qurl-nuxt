@@ -14,6 +14,7 @@ export type FormattedResponse = TableRow[] | PaginatedResponse
 
 export type Category = {
   id: number
+  icon: string
   createdAt: string
   isDefault: boolean
   name: string

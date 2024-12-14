@@ -24,6 +24,9 @@ export default defineAppConfig({
         size: 'md'
       }
     },
+    formGroup: {
+      error: 'text-xs'
+    },
     input: {
       default: {
         size: 'md'
@@ -40,8 +43,10 @@ export default defineAppConfig({
       }
     },
     selectMenu: {
+      option: {
+        selected: 'bg-shark-50'
+      },
       default: {
-        size: 'md',
         clearSearchOnClose: true
       }
     }

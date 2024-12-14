@@ -27,6 +27,9 @@
     "createdAt": {
       "label": "Created at"
     },
+    "updatedAt": {
+      "label": "Updated at"
+    },
     "url": {
       "label": "URL",
       "placeholder": "Enter URL"
@@ -77,7 +80,8 @@
       "Home Goods": "Home Goods",
       "Series and movies": "Series and movies",
       "Streaming platforms and videos": "Streaming platforms and videos",
-      "Beauty and Health": "Beauty and Health"
+      "Beauty and Health": "Beauty and Health",
+      "Other": "Other"
     }
   },
   "bookmark": {

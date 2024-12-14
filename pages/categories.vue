@@ -30,7 +30,7 @@ const {
 
 const columns = [
   { key: 'categoryName', label: t('fields.name.label') },
-  { key: 'createdAt', label: t('fields.createdAt.label') },
+  { key: 'updatedAt', label: t('fields.updatedAt.label') },
   { key: 'actions', class: 'w-9' }
 ]
 

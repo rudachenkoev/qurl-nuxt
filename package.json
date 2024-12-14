@@ -11,6 +11,7 @@
     "format": "npx prettier . --write"
   },
   "dependencies": {
+    "@iconify-json/heroicons": "^1.2.1",
     "@nuxt/fonts": "^0.10.2",
     "@nuxt/image": "^1.8.1",
     "@nuxt/ui": "^2.19.2",

@@ -45,14 +45,22 @@ watch(pageCount, value => {
     </template>
 
     <template #categoryId-data="{ row }">
-      {{ getCategoryTitle(getDirectoryByKey('categories', row.categoryId)) }}
+      <div class="flex items-center gap-x-2">
+        <UIcon :name="getDirectoryByKey('categories', row.categoryId)?.icon" class="size-5" />
+        <span>{{ getCategoryTitle(getDirectoryByKey('categories', row.categoryId)) }}</span>
+      </div>
     </template>
 
     <template #categoryName-data="{ row }">
-      {{ getCategoryTitle(row) }}
+      <div class="flex items-center gap-x-2">
+        <UIcon :name="row.icon" class="size-5" />
+        <span>{{ getCategoryTitle(row) }}</span>
+      </div>
     </template>
 
     <template #createdAt-data="{ row }">{{ useFormatDate(new Date(row.createdAt)) }}</template>
+
+    <template #updatedAt-data="{ row }">{{ useFormatDate(new Date(row.updatedAt)) }}</template>
 
     <template #actions-data="{ row }">
       <UDropdown v-if="actions && actions(row).length" :items="actions(row)">

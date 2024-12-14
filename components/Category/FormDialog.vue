@@ -31,11 +31,13 @@ const handleDialogClose = () => {
 }
 
 const schema = useValidationSchema({
-  name: Joi.string().required()
+  name: Joi.string().required(),
+  icon: Joi.string().optional()
 })
 
 const state = reactive<Partial<Category>>({
-  name: ''
+  name: '',
+  icon: 'i-heroicons-question-mark-circle'
 })
 
 const isLoading = ref(false)
@@ -69,10 +71,11 @@ defineExpose({ openDialogWindow })
 
 <template>
   <AppDialogWindow v-model="isVisible" :title="$t(`category.${category ? 'editing' : 'creating'}`)">
-    <UForm ref="form" :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
-      <UFormGroup :label="$t('fields.name.label')" name="name">
+    <UForm ref="form" :schema="schema" :state="state" class="flex space-x-4" @submit="onSubmit">
+      <UFormGroup :label="$t('fields.name.label')" name="name" class="grow">
         <UInput v-model="state.name" :placeholder="$t('fields.name.placeholder')" autocomplete="off" />
       </UFormGroup>
+      <IconsPicker v-model="state.icon" class="mt-6" />
     </UForm>
 
     <template #footer>

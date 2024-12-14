@@ -27,6 +27,9 @@
     "createdAt": {
       "label": "Створено"
     },
+    "updatedAt": {
+      "label": "Оновлено"
+    },
     "url": {
       "label": "URL",
       "placeholder": "Введіть URL"
@@ -75,9 +78,10 @@
       "Documents and Organizations": "Документи та організації",
       "Technology and equipment": "Технології та обладнання",
       "Home Goods": "Товари для дому",
-      "Series and movies": "Серіали та фільми",
+      "Series and movies": "Серіали та кіно",
       "Streaming platforms and videos": "Стрімінгові платформи та відео",
-      "Beauty and Health": "Краса та здоров'я"
+      "Beauty and Health": "Краса та здоров'я",
+      "Other": "Інше"
     }
   },
   "bookmark": {
