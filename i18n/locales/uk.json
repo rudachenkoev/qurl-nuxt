@@ -101,5 +101,8 @@
   "rowsPerPage": "Записів на сторінці",
   "autocompleteFormFields": "Автозаповнення полів форми",
   "clearFormConfirmation": "Незбережені зміни буде втрачено. Ви впевнені, що хочете очистити форму?",
-  "possibleOptions": "Можливі варіанти"
+  "possibleOptions": "Можливі варіанти",
+  "eventsCalendar": "Календар подій",
+  "notifications": "Сповіщення",
+  "notSyncContacts": "Контакти не синхронізовані"
 }

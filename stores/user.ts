@@ -2,8 +2,6 @@ import type { Contact, User } from '~/types'
 import { getAccountContacts, getAccountInformation } from '~/services/accountService'
 
 export const useUserStore = defineStore('user', () => {
-  const { $api } = useNuxtApp()
-
   const user = ref<User | null>(null)
   const getCurrentUser = async () => {
     try {

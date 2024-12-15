@@ -69,14 +69,13 @@ watch(pageCount, value => {
     </template>
   </UTable>
 
-  <div class="flex flex-wrap items-center justify-between">
+  <div v-if="totalCount" class="flex flex-wrap items-center justify-between">
     <div class="flex items-center gap-1.5">
       <span class="text-sm leading-5">{{ $t('rowsPerPage') }}:</span>
 
       <USelect v-model="pageCount" :options="[3, 5, 10, 20, 30, 40]" class="me-2" size="xs" />
     </div>
     <UPagination
-      v-if="totalCount"
       v-model="page"
       :page-count="+pageCount"
       :total="totalCount"
