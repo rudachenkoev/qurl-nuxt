@@ -38,7 +38,11 @@ export type Channel = {
 
 export type User = {
   email: string
-  isActive: boolean
+  isActive: boolean,
+  createdAt: string,
+  updatedAt: string,
+  contactsSyncAt: string,
+  calendarSyncAt: string
 }
 
 export type Contact = {
