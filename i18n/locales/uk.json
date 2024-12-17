@@ -51,6 +51,9 @@
       "label": "Контакт телефоної книги",
       "placeholder": "Оберіть контакт",
       "searchPlaceholder": "Почніть шукати контакт..."
+    },
+    "birthday": {
+      "label": "День народження"
     }
   },
   "btn": {
@@ -101,5 +104,8 @@
   "rowsPerPage": "Записів на сторінці",
   "autocompleteFormFields": "Автозаповнення полів форми",
   "clearFormConfirmation": "Незбережені зміни буде втрачено. Ви впевнені, що хочете очистити форму?",
-  "possibleOptions": "Можливі варіанти"
+  "possibleOptions": "Можливі варіанти",
+  "eventsCalendar": "Календар подій",
+  "notifications": "Сповіщення",
+  "notSyncContacts": "Телефоні контакти не синхронізовані"
 }

@@ -51,6 +51,9 @@
       "label": "Phone number contact",
       "placeholder": "Select contact",
       "searchPlaceholder": "Search a contact..."
+    },
+    "birthday": {
+      "label": "Birthday"
     }
   },
   "btn": {
@@ -101,5 +104,8 @@
   "rowsPerPage": "Rows per page",
   "autocompleteFormFields": "Autocomplete form fields",
   "clearFormConfirmation": "Unsaved changes will be lost. Are you sure you want to clear the form?",
-  "possibleOptions": "Possible options"
+  "possibleOptions": "Possible options",
+  "eventsCalendar": "Events calendar",
+  "notifications": "Notifications",
+  "notSyncContacts": "Contacts aren't synchronized"
 }
