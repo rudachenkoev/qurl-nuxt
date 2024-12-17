@@ -62,7 +62,8 @@
     "delete": "Delete",
     "confirm": "Confirm",
     "cancel": "Cancel",
-    "clear": "Clear"
+    "clear": "Clear",
+    "collapse": "Collapse"
   },
   "category": {
     "create": "Create category",
