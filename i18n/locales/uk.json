@@ -107,6 +107,5 @@
   "possibleOptions": "Можливі варіанти",
   "eventsCalendar": "Календар подій",
   "notifications": "Сповіщення",
-  "notSyncContacts": "Телефоні контакти не синхронізовані",
-  "notSyncCalendar": "Календар подій не синхронізований"
+  "notSyncContacts": "Телефоні контакти не синхронізовані"
 }

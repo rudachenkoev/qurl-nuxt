@@ -107,6 +107,5 @@
   "possibleOptions": "Possible options",
   "eventsCalendar": "Events calendar",
   "notifications": "Notifications",
-  "notSyncContacts": "Contacts aren't synchronized",
-  "notSyncCalendar": "Events calendar isn't synchronized"
+  "notSyncContacts": "Contacts aren't synchronized"
 }

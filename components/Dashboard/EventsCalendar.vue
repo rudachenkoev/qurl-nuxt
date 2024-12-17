@@ -25,7 +25,7 @@ const attributes = computed<Partial<AttributeConfig>[]>(() => {
       dot: 'red',
       dates: {
         start: new Date(year, month, day),
-        repeat: { every: [12, 'months'], days: day },
+        repeat: { every: [12, 'months'], days: day }
       },
       popover: {
         label: `🎉 ${t('fields.birthday.label')}: ${contact.name}`,
@@ -57,9 +57,13 @@ const attributes = computed<Partial<AttributeConfig>[]>(() => {
       expanded
     />
     <div v-else class="grid grid-cols-7 gap-x-4 gap-y-2 p-3">
-      <div class="col-start-1 col-end-3 w-full h-7 animate-pulse rounded bg-gray-200"/>
-      <div class="col-start-5 col-end-8 w-full h-7 animate-pulse rounded bg-gray-200"/>
-      <div v-for="i in 31" :key="i" :class="`size-7 animate-pulse rounded-full bg-gray-200 ${i === 1 ? 'col-start-3' : ''}`" />
+      <div class="col-start-1 col-end-3 h-7 w-full animate-pulse rounded bg-gray-200" />
+      <div class="col-start-5 col-end-8 h-7 w-full animate-pulse rounded bg-gray-200" />
+      <div
+        v-for="i in 31"
+        :key="i"
+        :class="`size-7 animate-pulse rounded-full bg-gray-200 ${i === 1 ? 'col-start-3' : ''}`"
+      />
     </div>
   </div>
 </template>
