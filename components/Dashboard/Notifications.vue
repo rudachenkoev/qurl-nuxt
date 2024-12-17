@@ -2,14 +2,6 @@
 import { useUserStore } from '~/stores/user'
 
 const { user } = storeToRefs(useUserStore())
-const { t } = useI18n()
-
-const systemNotifications = computed(() => {
-  return [
-    { title: t('notSyncCalendar'), isShow: user.value && !user.value.calendarSyncAt },
-    { title: t('notSyncContacts'), isShow: user.value && !user.value.contactsSyncAt }
-  ].filter(notification => notification.isShow)
-})
 </script>
 
 <template>
@@ -18,15 +10,14 @@ const systemNotifications = computed(() => {
 
     <div class="flex flex-col space-y-2">
       <UNotification
-        v-for="(notification, index) in systemNotifications"
-        :id="index"
+        v-if="user && !user.contactsSyncAt"
+        :id="0"
         :timeout="0"
         icon="i-heroicons-exclamation-triangle"
-        :title="notification.title"
+        :title="$t('notSyncContacts')"
         :close-button="{ icon: '' }"
       />
     </div>
-
   </div>
 </template>
 

@@ -41,8 +41,7 @@ export type User = {
   isActive: boolean,
   createdAt: string,
   updatedAt: string,
-  contactsSyncAt: string,
-  calendarSyncAt: string
+  contactsSyncAt: string
 }
 
 export type Contact = {

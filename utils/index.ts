@@ -24,3 +24,8 @@ export const getFaviconUrl = (url: string) => {
     return undefined
   }
 }
+
+export function getDateOffset(days = 0) {
+  const futureDate = new Date(Date.now() + days * 24 * 60 * 60 * 1000)
+  return futureDate.toISOString().split('T')[0]
+}

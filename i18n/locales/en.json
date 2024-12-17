@@ -51,6 +51,9 @@
       "label": "Phone number contact",
       "placeholder": "Select contact",
       "searchPlaceholder": "Search a contact..."
+    },
+    "birthday": {
+      "label": "Birthday"
     }
   },
   "btn": {
