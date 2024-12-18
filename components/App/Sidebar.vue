@@ -7,8 +7,9 @@ const localeRoute = useLocaleRoute()
 const { t } = useI18n()
 const { user } = storeToRefs(useUserStore())
 const route = useRoute()
+const { currentBreakpoint } = useBreakpoint()
 
-const isCollapsed = ref(false)
+const isCollapsed = ref(currentBreakpoint.value === 'md')
 
 const uiSettings = computed(() => ({
   wrapper: 'customNavigationWrapper grow py-3',
@@ -31,21 +32,24 @@ const isActiveLink = (link: RouteLocation, exact = false) => {
 
 const links = computed<VerticalNavigationLink[]>(() => {
   return [
-    { icon: 'home', label: t('navigation.home'), to: localeRoute({ name: 'index' }), exact: true },
-    { icon: 'archive-box', label: t('navigation.categories'), to: localeRoute({ name: 'categories' }) },
-    { icon: 'bookmark', label: t('navigation.bookmarks'), to: localeRoute({ name: 'bookmarks' }) },
-    { icon: 'cog-6-tooth', label: t('navigation.settings'), to: localeRoute({ name: 'settings' }) },
+    { icon: 'home', label: t('navigation.home'), to: localeRoute({ name: 'index' }), exact: true, isShown: true },
+    { icon: 'archive-box', label: t('navigation.categories'), to: localeRoute({ name: 'categories' }), isShown: true },
+    { icon: 'bookmark', label: t('navigation.bookmarks'), to: localeRoute({ name: 'bookmarks' }), isShown: true },
+    { icon: 'cog-6-tooth', label: t('navigation.settings'), to: localeRoute({ name: 'settings' }), isShown: true },
     {
       icon: `chevron-double-${isCollapsed.value ? 'right' : 'left'}`,
       label: t('btn.collapse'),
+      isShown: ['md', 'lg', 'xl', '2xl'].includes(currentBreakpoint.value),
       click: () => (isCollapsed.value = !isCollapsed.value)
     }
-  ].map(link => ({
-    ...link,
-    label: !isCollapsed.value ? link.label : '',
-    icon: `i-heroicons-${link.icon}`,
-    active: link.to ? isActiveLink(link.to, link.exact) : false
-  }))
+  ]
+    .filter(link => link.isShown)
+    .map(link => ({
+      ...link,
+      label: !isCollapsed.value ? link.label : '',
+      icon: `i-heroicons-${link.icon}`,
+      active: link.to ? isActiveLink(link.to, link.exact) : false
+    }))
 })
 </script>
 

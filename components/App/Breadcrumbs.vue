@@ -29,10 +29,10 @@ const breadcrumbs = computed<BreadcrumbLink[]>(() => {
 
 <template>
   <UBreadcrumb v-if="breadcrumbs.length > 1" :links="breadcrumbs" />
-  <template v-else>
+  <div v-else>
     <p class="text-sm font-medium text-shark-950 dark:text-shark-50">{{ $t('greeting', { name: 'John' }) }}</p>
     <p class="text-xs capitalize text-shark-800 dark:text-shark-300">
       {{ useFormatDate(new Date(), { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric' }) }}
     </p>
-  </template>
+  </div>
 </template>

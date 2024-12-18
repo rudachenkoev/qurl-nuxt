@@ -2,6 +2,7 @@
 import { useDirectoryStore } from '~/stores/directory'
 import { useUserStore } from '~/stores/user'
 
+const { currentBreakpoint } = useBreakpoint()
 const directoryStore = useDirectoryStore()
 const { getDirectories } = directoryStore
 const { isDirectoriesLoaded } = storeToRefs(directoryStore)
@@ -18,7 +19,7 @@ Promise.all([!isDirectoriesLoaded.value && getDirectories(), !isContactsLoaded.v
     <div
       class="container mx-auto flex gap-6 rounded-2xl border border-shark-200 bg-shark-50 p-6 dark:border-shark-600 dark:bg-shark-900"
     >
-      <AppNavigation />
+      <LazyAppSidebar v-if="['md', 'lg', 'xl', '2xl'].includes(currentBreakpoint)" />
       <div
         class="grow overflow-hidden rounded-xl border border-shark-200 bg-white dark:border-shark-600 dark:bg-shark-700"
       >
