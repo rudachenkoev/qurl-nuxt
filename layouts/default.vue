@@ -15,16 +15,16 @@ Promise.all([!isDirectoriesLoaded.value && getDirectories(), !isContactsLoaded.v
 </script>
 
 <template>
-  <div class="h-screen bg-shark-100 p-6 dark:bg-shark-950">
+  <div class="h-screen bg-shark-100 md:p-4 dark:bg-shark-950">
     <div
-      class="container mx-auto flex gap-6 rounded-2xl border border-shark-200 bg-shark-50 p-6 dark:border-shark-600 dark:bg-shark-900"
+      class="container mx-auto flex max-h-full gap-6 border-shark-200 bg-shark-50 md:rounded-xl md:border md:p-4 dark:border-shark-600 dark:bg-shark-900"
     >
       <LazyAppSidebar v-if="['md', 'lg', 'xl', '2xl'].includes(currentBreakpoint)" />
       <div
-        class="grow overflow-hidden rounded-xl border border-shark-200 bg-white dark:border-shark-600 dark:bg-shark-700"
+        class="grow overflow-auto border-shark-200 bg-white md:rounded-xl md:border dark:border-shark-600 dark:bg-shark-700"
       >
         <AppHeader />
-        <main class="overflow-auto p-3">
+        <main class="p-3">
           <slot />
         </main>
       </div>

@@ -66,8 +66,8 @@ const handleBookmarkDelete = async (bookmark: ExtendedBookmark) => {
 </script>
 
 <template>
-  <div class="flex items-center justify-between">
-    <h1 class="mb-3 text-2xl font-medium md:text-3xl">{{ $t('navigation.bookmarks') }}</h1>
+  <div class="mb-3 flex items-center justify-between">
+    <h1 class="text-2xl font-medium md:text-3xl">{{ $t('navigation.bookmarks') }}</h1>
     <UButton :label="$t('bookmark.create')" icon="i-heroicons-plus" :to="localeRoute({ name: 'bookmarks-create' })" />
   </div>
   <AppTable

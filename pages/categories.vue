@@ -90,8 +90,8 @@ const handleCategoryUpdate = ({ action, response }: { action: SubmitAction; resp
 </script>
 
 <template>
-  <div class="flex items-center justify-between">
-    <h1 class="mb-3 text-2xl font-medium md:text-3xl">{{ $t('navigation.bookmarks') }}</h1>
+  <div class="mb-3 flex items-center justify-between">
+    <h1 class="text-2xl font-medium md:text-3xl">{{ $t('navigation.categories') }}</h1>
     <UButton :label="$t('category.create')" icon="i-heroicons-plus" @click="categoryFormDialog.openDialogWindow()" />
     <CategoryFormDialog ref="categoryFormDialog" @onSuccess="handleCategoryUpdate" />
   </div>
