@@ -15,6 +15,9 @@ export default defineAppConfig({
     formGroup: {
       error: 'text-xs'
     },
+    modal: {
+      container: 'items-center'
+    },
     input: {
       default: {
         size: 'md'
