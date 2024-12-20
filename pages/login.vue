@@ -17,7 +17,7 @@ const authTabsFlow = ['settings', 'device']
         <UBadge color="shark" variant="subtle" class="rounded-lg">
           <UIcon name="i-heroicons-viewfinder-circle" class="size-6" />
         </UBadge>
-        <h1 class="text-2xl font-medium md:text-3xl">{{ $t('auth.loginToQurlWeb') }}</h1>
+        <h1 class="font-medium ~text-xl/2xl">{{ $t('auth.loginToQurlWeb') }}</h1>
       </div>
 
       <ol class="list-inside list-decimal space-y-2">

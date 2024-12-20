@@ -11,7 +11,7 @@ const isOpenNavigationMenu = ref(false)
     <AppBreadcrumbs />
     <template v-if="['xs', 'sm'].includes(currentBreakpoint)">
       <UButton icon="i-heroicons-bars-3" size="sm" variant="ghost" @click="isOpenNavigationMenu = true" />
-      <USlideover v-model="isOpenNavigationMenu" side="left" :ui="{ base: 'p-6', width: 'max-w-60' }">
+      <USlideover v-model="isOpenNavigationMenu" side="left" :ui="{ base: 'p-4', width: 'max-w-56' }">
         <LazyAppSidebar />
       </USlideover>
     </template>

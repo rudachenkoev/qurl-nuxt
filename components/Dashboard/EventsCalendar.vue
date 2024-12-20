@@ -39,7 +39,7 @@ const attributes = computed<Partial<AttributeConfig>[]>(() => {
 
 <template>
   <div class="p-3">
-    <h3 class="mb-3 text-xl font-medium">{{ $t('eventsCalendar') }}</h3>
+    <h3 class="mb-3 font-medium ~text-base/xl">{{ $t('eventsCalendar') }}</h3>
 
     <VCalendar
       v-if="isContactsSynced"

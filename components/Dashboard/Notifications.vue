@@ -6,7 +6,7 @@ const { user } = storeToRefs(useUserStore())
 
 <template>
   <div class="p-3">
-    <h3 class="mb-3 text-xl font-medium">{{ $t('notifications') }}</h3>
+    <h3 class="mb-3 font-medium ~text-base/xl">{{ $t('notifications') }}</h3>
 
     <div class="flex flex-col space-y-2">
       <UNotification

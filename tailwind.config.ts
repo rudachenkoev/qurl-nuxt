@@ -1,7 +1,17 @@
 import type { Config } from 'tailwindcss'
+import fluid, { extract, screens, fontSize } from 'fluid-tailwind'
 
 export default <Partial<Config>>{
+  content: {
+    files: [
+      /* ... */
+    ],
+    extract
+  },
+  plugins: [fluid],
   theme: {
+    screens,
+    fontSize,
     extend: {
       colors: {
         shark: {

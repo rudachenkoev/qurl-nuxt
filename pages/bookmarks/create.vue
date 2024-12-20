@@ -7,7 +7,7 @@ useHead({
 </script>
 
 <template>
-  <h1 class="mb-3 text-2xl font-medium md:text-3xl">{{ $t('bookmark.creating') }}</h1>
+  <h1 class="mb-3 font-medium ~text-xl/2xl">{{ $t('bookmark.creating') }}</h1>
   <BookmarkForm />
 </template>
 

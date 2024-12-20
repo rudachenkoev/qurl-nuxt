@@ -12,9 +12,11 @@ const localeRoute = useLocaleRoute()
 
 const { confirmationHandler } = useConfirmationDialogStore()
 
-const { data: lastPublications, status } = await useLazyAsyncData<FormattedResponse>('lastPublications', () =>
-  getBookmarks({ ordering: 'createdAt' })
-)
+const {
+  data: lastPublications,
+  status,
+  refresh: refreshBookmarks
+} = await useLazyAsyncData<FormattedResponse>('lastPublications', () => getBookmarks({ ordering: 'createdAt' }))
 
 const columns = [
   { key: 'bookmarkTitle', label: t('fields.title.label') },
@@ -57,7 +59,7 @@ const handleBookmarkDelete = async (bookmark: ExtendedBookmark) => {
 
 <template>
   <div class="grow">
-    <h3 class="mb-3 text-xl font-medium">{{ $t('lastPublications') }}</h3>
+    <h3 class="mb-3 font-medium ~text-base/xl">{{ $t('lastPublications') }}</h3>
     <AppTable
       :rows="isNotPaginatedResponse(lastPublications) ? lastPublications : []"
       :columns="columns"

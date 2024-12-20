@@ -13,7 +13,7 @@ const isVisible = defineModel({ type: Boolean, default: false })
     <UCard :ui="{ divide: 'divide-y divide-shark-200 dark:divide-shark-600' }">
       <template #header>
         <slot name="title">
-          <h3 class="text-2xl font-medium">{{ title }}</h3>
+          <h3 class="font-medium ~text-base/xl">{{ title }}</h3>
         </slot>
       </template>
 

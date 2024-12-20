@@ -7,10 +7,12 @@ useHead({
 </script>
 
 <template>
-  <h1 class="mb-3 text-2xl font-medium md:text-3xl">{{ $t('navigation.home') }}</h1>
+  <h1 class="mb-3 font-medium ~text-xl/2xl">{{ $t('navigation.home') }}</h1>
   <div class="divide-shark-200 xl:flex xl:divide-x dark:divide-shark-600">
     <DashboardLastPublications />
-    <div class="min-w-96 divide-shark-200 md:flex xl:flex-col xl:divide-y dark:divide-shark-600">
+    <div
+      class="divide-y divide-shark-200 md:flex md:min-w-80 md:divide-y-0 lg:divide-y-0 xl:flex-col xl:divide-y dark:divide-shark-600"
+    >
       <DashboardEventsCalendar />
       <DashboardNotifications />
     </div>
