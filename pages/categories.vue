@@ -15,6 +15,7 @@ useHead({
 const route = useRoute()
 const toast = useToast()
 const localeRoute = useLocaleRoute()
+const { checkBreakpoint } = useBreakpoint()
 
 const { confirmationHandler } = useConfirmationDialogStore()
 
@@ -92,7 +93,11 @@ const handleCategoryUpdate = ({ action, response }: { action: SubmitAction; resp
 <template>
   <div class="mb-3 flex items-center justify-between">
     <h1 class="font-medium ~text-xl/2xl">{{ $t('navigation.categories') }}</h1>
-    <UButton :label="$t('category.create')" icon="i-heroicons-plus" @click="categoryFormDialog.openDialogWindow()" />
+    <UButton
+      :label="checkBreakpoint('md') ? $t('category.create') : ''"
+      icon="i-heroicons-plus"
+      @click="categoryFormDialog.openDialogWindow()"
+    />
     <CategoryFormDialog ref="categoryFormDialog" @onSuccess="handleCategoryUpdate" />
   </div>
   <AppTable

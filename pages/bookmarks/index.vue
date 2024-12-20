@@ -15,6 +15,7 @@ useHead({
 const route = useRoute()
 const toast = useToast()
 const localeRoute = useLocaleRoute()
+const { checkBreakpoint } = useBreakpoint()
 
 const { confirmationHandler } = useConfirmationDialogStore()
 
@@ -68,7 +69,11 @@ const handleBookmarkDelete = async (bookmark: ExtendedBookmark) => {
 <template>
   <div class="mb-3 flex items-center justify-between">
     <h1 class="font-medium ~text-xl/2xl">{{ $t('navigation.bookmarks') }}</h1>
-    <UButton :label="$t('bookmark.create')" icon="i-heroicons-plus" :to="localeRoute({ name: 'bookmarks-create' })" />
+    <UButton
+      :label="checkBreakpoint('md') ? $t('bookmark.create') : ''"
+      icon="i-heroicons-plus"
+      :to="localeRoute({ name: 'bookmarks-create' })"
+    />
   </div>
   <AppTable
     :rows="isPaginatedResponse(bookmarks) ? bookmarks.results : []"

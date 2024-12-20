@@ -7,9 +7,9 @@ const localeRoute = useLocaleRoute()
 const { t } = useI18n()
 const { user } = storeToRefs(useUserStore())
 const route = useRoute()
-const { currentBreakpoint } = useBreakpoint()
+const { checkBreakpoint } = useBreakpoint()
 
-const isCollapsed = ref(currentBreakpoint.value === 'md')
+const isCollapsed = ref(checkBreakpoint(['md']))
 
 const uiSettings = computed(() => ({
   wrapper: 'customNavigationWrapper grow py-3',
@@ -39,7 +39,7 @@ const links = computed<VerticalNavigationLink[]>(() => {
     {
       icon: `chevron-double-${isCollapsed.value ? 'right' : 'left'}`,
       label: t('btn.collapse'),
-      isShown: ['md', 'lg', 'xl', '2xl'].includes(currentBreakpoint.value),
+      isShown: checkBreakpoint('md'),
       click: () => (isCollapsed.value = !isCollapsed.value)
     }
   ]
