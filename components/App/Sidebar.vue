@@ -54,7 +54,7 @@ const links = computed<VerticalNavigationLink[]>(() => {
 </script>
 
 <template>
-  <div class="flex max-w-48 flex-col">
+  <div :class="`flex flex-col transition-all ease-linear ${isCollapsed ? 'w-14' : 'w-44'}`">
     <div
       class="flex h-16 items-center gap-3 border-y border-b-shark-200 border-t-transparent px-3 dark:border-shark-600"
     >
