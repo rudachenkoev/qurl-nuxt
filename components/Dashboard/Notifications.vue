@@ -5,7 +5,7 @@ const { user } = storeToRefs(useUserStore())
 </script>
 
 <template>
-  <div class="p-3">
+  <div class="w-full p-3">
     <h3 class="mb-3 font-medium ~text-base/xl">{{ $t('notifications') }}</h3>
 
     <div class="flex flex-col space-y-2">
@@ -17,6 +17,9 @@ const { user } = storeToRefs(useUserStore())
         :title="$t('notSyncContacts')"
         :close-button="{ icon: '' }"
       />
+      <div v-else class="flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14">
+        <p class="text-sm text-center text-shark-300 dark:text-shark-400">{{ $t('noItems') }}</p>
+      </div>
     </div>
   </div>
 </template>
