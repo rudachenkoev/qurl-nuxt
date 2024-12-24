@@ -8,10 +8,10 @@ useHead({
 
 <template>
   <h1 class="mb-3 font-medium ~text-xl/2xl">{{ $t('navigation.home') }}</h1>
-  <div class="divide-shark-200 xl:flex xl:divide-x dark:divide-shark-600">
+  <div class="divide-gallery-200 xl:flex xl:divide-x dark:divide-gallery-600">
     <DashboardLastPublications />
     <div
-      class="divide-y divide-shark-200 md:flex md:min-w-80 md:divide-y-0 lg:divide-y-0 xl:flex-col xl:divide-y dark:divide-shark-600"
+      class="divide-y divide-gallery-200 md:flex md:min-w-80 md:divide-y-0 lg:divide-y-0 xl:flex-col xl:divide-y dark:divide-gallery-600"
     >
       <DashboardEventsCalendar />
       <DashboardNotifications />

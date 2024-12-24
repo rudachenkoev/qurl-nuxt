@@ -18,13 +18,13 @@ Promise.all([
 </script>
 
 <template>
-  <div class="h-screen bg-shark-100 md:p-3 dark:bg-shark-950">
+  <div class="h-screen bg-gallery-100 md:p-3 dark:bg-gallery-950">
     <div
-      class="container mx-auto flex h-full max-h-full gap-4 border-shark-200 bg-shark-50 md:h-auto md:rounded-xl md:border md:p-3 dark:border-shark-600 dark:bg-shark-900"
+      class="container mx-auto flex h-full max-h-full gap-4 border-gallery-200 bg-gallery-50 md:h-auto md:rounded-xl md:border md:p-3 dark:border-gallery-600 dark:bg-gallery-900"
     >
       <LazyAppSidebar v-if="checkBreakpoint('md')" />
       <div
-        class="grow overflow-auto border-shark-200 bg-white md:rounded-xl md:border dark:border-shark-600 dark:bg-shark-700"
+        class="grow overflow-auto border-gallery-200 bg-white md:rounded-xl md:border dark:border-gallery-600 dark:bg-gallery-700"
       >
         <AppHeader />
         <main class="p-3">

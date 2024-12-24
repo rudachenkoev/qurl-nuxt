@@ -10,7 +10,7 @@ const isVisible = defineModel({ type: Boolean, default: false })
 
 <template>
   <UModal v-model="isVisible">
-    <UCard :ui="{ divide: 'divide-y divide-shark-200 dark:divide-shark-600' }">
+    <UCard :ui="{ divide: 'divide-y divide-gallery-200 dark:divide-gallery-600' }">
       <template #header>
         <slot name="title">
           <h3 class="font-medium ~text-base/xl">{{ title }}</h3>

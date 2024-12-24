@@ -5,7 +5,7 @@ useHead({
 </script>
 
 <template>
-  <NuxtLayout>
+  <NuxtLayout class="font-sans text-gallery-950 dark:text-gallery-50">
     <NuxtPage />
   </NuxtLayout>
 

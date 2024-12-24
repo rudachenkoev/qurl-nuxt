@@ -13,7 +13,7 @@ watch(
 
 <template>
   <header
-    class="sticky top-0 z-10 flex h-16 items-center justify-between border-b border-shark-200 bg-white px-3 shadow-sm md:shadow-none dark:border-shark-600 dark:bg-shark-700"
+    class="sticky top-0 z-10 flex h-16 items-center justify-between border-b border-gallery-200 bg-white px-3 shadow-sm md:shadow-none dark:border-gallery-600 dark:bg-gallery-700"
   >
     <AppBreadcrumbs />
     <template v-if="checkBreakpoint(['xs', 'sm'])">

@@ -17,8 +17,8 @@ const { user } = storeToRefs(useUserStore())
         :title="$t('notSyncContacts')"
         :close-button="{ icon: '' }"
       />
-      <div v-else class="flex flex-col items-center justify-center flex-1 px-6 py-14 sm:px-14">
-        <p class="text-sm text-center text-shark-300 dark:text-shark-400">{{ $t('noItems') }}</p>
+      <div v-else class="flex flex-1 flex-col items-center justify-center px-6 py-14 sm:px-14">
+        <p class="text-center text-sm text-gallery-300 dark:text-gallery-400">{{ $t('noItems') }}</p>
       </div>
     </div>
   </div>

@@ -126,7 +126,7 @@ onMounted(() => {
             icon="i-heroicons-document-check"
             :disabled="!state.url"
             :loading="isUrlAutocompleting"
-            color="shark"
+            color="gallery"
             @click="autocompleteUrlData"
           />
         </UTooltip>
@@ -170,7 +170,7 @@ onMounted(() => {
         </template>
       </USelectMenu>
       <div v-if="categoriesSuggestion.length" class="mt-2 flex flex-wrap items-center gap-3">
-        <p class="text-sm text-shark-800 dark:text-shark-300">{{ $t('possibleOptions') }}:</p>
+        <p class="text-sm text-gallery-800 dark:text-gallery-300">{{ $t('possibleOptions') }}:</p>
         <UButton
           v-for="suggestion in categoriesSuggestion"
           :label="suggestion.name"

@@ -17,11 +17,11 @@ const options = computed<Partial<Options>>(() => ({
   data: props.data,
   image: Logo,
   dotsOptions: {
-    color: tailwindConfig.theme.extend.colors.shark[950],
+    color: tailwindConfig.theme.extend.colors.gallery[950],
     type: 'extra-rounded'
   },
   backgroundOptions: {
-    color: tailwindConfig.theme.extend.colors.shark[50]
+    color: tailwindConfig.theme.extend.colors.gallery[50]
   },
   imageOptions: {
     crossOrigin: 'anonymous',

@@ -1,15 +1,16 @@
 export default defineAppConfig({
   ui: {
-    primary: 'shark',
+    primary: 'web-orange',
+    gray: 'gallery',
     table: {
       emptyState: {
-        icon: 'text-shark-300 dark:text-shark-400',
-        label: 'text-sm text-center text-shark-300 dark:text-shark-400'
+        icon: 'text-gallery-300 dark:text-gallery-400',
+        label: 'text-sm text-center text-gallery-300 dark:text-gallery-400'
       }
     },
     divider: {
       border: {
-        base: 'border-shark-200 dark:border-shark-600'
+        base: 'border-gallery-200 dark:border-gallery-600'
       }
     },
     button: {
@@ -41,7 +42,7 @@ export default defineAppConfig({
     },
     selectMenu: {
       option: {
-        selected: 'bg-shark-50'
+        selected: 'bg-gallery-50'
       },
       default: {
         clearSearchOnClose: true

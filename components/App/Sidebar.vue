@@ -16,12 +16,12 @@ const uiSettings = computed(() => ({
   base: isCollapsed.value ? 'justify-center' : 'gap-3',
   padding: 'px-3 py-2',
   rounded: 'rounded-lg',
-  active: 'text-shark-950 dark:text-shark-50 before:bg-white dark:before:bg-shark-500 shadow',
+  active: 'text-gallery-950 dark:text-gallery-50 before:bg-white dark:before:bg-gallery-500 shadow',
   inactive:
-    'text-shark-500 dark:text-shark-300 hover:text-shark-800 dark:hover:text-shark-200 hover:before:bg-shark-50 dark:hover:before:bg-shark-900',
+    'text-gallery-500 dark:text-gallery-300 hover:text-gallery-800 dark:hover:text-gallery-200 hover:before:bg-gallery-50 dark:hover:before:bg-gallery-900',
   icon: {
-    active: 'text-shark-950 dark:text-shark-50',
-    inactive: 'text-shark-500 dark:text-shark-300 hover:text-shark-800 dark:hover:text-shark-200'
+    active: 'text-gallery-950 dark:text-gallery-50',
+    inactive: 'text-gallery-500 dark:text-gallery-300 hover:text-gallery-800 dark:hover:text-gallery-200'
   }
 }))
 
@@ -56,14 +56,14 @@ const links = computed<VerticalNavigationLink[]>(() => {
 <template>
   <div :class="`flex flex-col transition-all ease-linear ${isCollapsed ? 'w-14' : 'w-44'}`">
     <div
-      class="flex h-16 items-center gap-3 border-y border-b-shark-200 border-t-transparent px-3 dark:border-shark-600"
+      class="flex h-16 items-center gap-3 border-y border-b-gallery-200 border-t-transparent px-3 dark:border-gallery-600"
     >
       <NuxtLink :to="localeRoute({ name: 'index' })">
         <NuxtImg src="./images/favicon.png" width="28" height="28" alt="logo" />
       </NuxtLink>
       <div v-if="!isCollapsed">
-        <p class="whitespace-nowrap text-sm font-medium text-shark-950 dark:text-shark-50">John Doe</p>
-        <p class="whitespace-nowrap text-xs text-shark-800 dark:text-shark-300">{{ user?.email }}</p>
+        <p class="whitespace-nowrap text-sm font-medium text-gallery-950 dark:text-gallery-50">John Doe</p>
+        <p class="whitespace-nowrap text-xs text-gallery-800 dark:text-gallery-300">{{ user?.email }}</p>
       </div>
     </div>
 
