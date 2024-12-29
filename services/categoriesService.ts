@@ -1,10 +1,10 @@
 import type { Category, FormattedResponse } from '~/types'
 import { useApiCall } from '~/services/index'
 
-export const getCategories = (query: Record<string, any>) =>
+export const getCategories = (query?: Record<string, any>) =>
   useApiCall<FormattedResponse>('api/v1/categories/', { query })
 
-export const getBookmark = (id: string | number) => useApiCall<Category>(`api/v1/categories/${id}/`)
+export const getCategory = (id: string | number) => useApiCall<Category>(`api/v1/categories/${id}/`)
 
 export const createBookmark = (data: Partial<Category>) =>
   useApiCall<Category>('api/v1/categories/', { method: 'POST', body: data })

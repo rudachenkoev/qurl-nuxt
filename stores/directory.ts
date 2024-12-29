@@ -4,29 +4,12 @@ export type DirectoryItem = {
 }
 
 export const useDirectoryStore = defineStore('directory', () => {
-  const { $api } = useNuxtApp()
-
-  const isDirectoriesLoaded = ref(false)
-  const categories = ref<DirectoryItem[]>([])
+  const directoryExample = ref<DirectoryItem[]>([
+    { id: 1, name: '' }
+  ])
 
   const directories = {
-    categories
-  }
-
-  const directoriesInfo = [{ url: 'api/v1/categories', state: categories }]
-
-  const getDirectories = async (): Promise<void> => {
-    try {
-      const fetchPromises = directoriesInfo.map(async ({ url, state }) => {
-        state.value = await $api(url)
-      })
-
-      await Promise.all(fetchPromises)
-    } catch (err) {
-      useErrorHandler(err, 'Get directories error')
-    } finally {
-      isDirectoriesLoaded.value = true
-    }
+    directoryExample
   }
 
   const getDirectoryByKey = <T extends keyof typeof directories>(
@@ -34,8 +17,6 @@ export const useDirectoryStore = defineStore('directory', () => {
     value: any,
     key = 'id'
   ): DirectoryItem | null => {
-    if (!isDirectoriesLoaded.value) return null
-
     const directoryRef = directories[directoryName]
 
     if (!directoryRef) {
@@ -46,13 +27,5 @@ export const useDirectoryStore = defineStore('directory', () => {
     return directoryRef.value.find(item => item[key] === value) || null
   }
 
-  const getCategories = async () => {
-    try {
-      categories.value = await $api('api/v1/categories')
-    } catch (err) {
-      console.error('Failed to fetch categories:', err)
-    }
-  }
-
-  return { categories, getDirectories, getDirectoryByKey, isDirectoriesLoaded, getCategories }
+  return { ...directories, getDirectoryByKey }
 })

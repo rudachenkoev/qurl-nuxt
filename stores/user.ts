@@ -5,7 +5,8 @@ export const useUserStore = defineStore('user', () => {
   const user = ref<User | null>(null)
   const getCurrentUser = async () => {
     try {
-      user.value = await getAccountInformation()
+      const data = await getAccountInformation()
+      user.value = { ...data, lastName: 'Doe', firstName: 'John' }
       return user.value
     } catch (err) {
       useErrorHandler(err, 'Get current user error')

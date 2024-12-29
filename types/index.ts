@@ -1,5 +1,3 @@
-import type { TableRow } from '#ui/types'
-
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS' | 'HEAD'
 
 export type SubmitAction = 'created' | 'edited'
@@ -7,10 +5,10 @@ export type SubmitAction = 'created' | 'edited'
 export type PaginatedResponse = {
   totalCount: number
   totalPages: number
-  results: TableRow[]
+  results: any[]
 }
 
-export type FormattedResponse = TableRow[] | PaginatedResponse
+export type FormattedResponse = any[] | PaginatedResponse
 
 export type Category = {
   id: number
@@ -37,6 +35,8 @@ export type Channel = {
 }
 
 export type User = {
+  lastName: string
+  firstName: string
   email: string
   isActive: boolean
   createdAt: string

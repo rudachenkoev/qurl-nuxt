@@ -63,7 +63,8 @@
     "confirm": "Confirm",
     "cancel": "Cancel",
     "clear": "Clear",
-    "collapse": "Collapse"
+    "collapse": "Collapse",
+    "logout": "Logout"
   },
   "category": {
     "create": "Create category",
